@@ -94,10 +94,10 @@
   .hero > *{position:relative;z-index:1;}
   .hero .icon{width:112px;height:112px;border-radius:26px;margin:0 auto 36px;box-shadow:0 30px 70px rgba(0,0,0,.4),0 10px 24px rgba(255,107,53,.25);}
   .eyebrow{font-size:13px;font-weight:600;color:#6ab1ff;letter-spacing:.08em;text-transform:uppercase;margin-bottom:20px;}
-  .h1{font-size:clamp(52px,9vw,128px);font-weight:800;letter-spacing:-.04em;line-height:.98;color:#fff;}
+  .h1{font-size:clamp(34px,6.5vw,88px);font-weight:800;letter-spacing:-.04em;line-height:1.1;color:#fff;}
   .h1 .grad{background:linear-gradient(120deg,#ff8e5e 0%,#ff5491 45%,#9d80ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
-  .m-only{display:none;}
-  @media (max-width:480px){ .m-only{display:inline;} }
+  .m-only,.m-only2{display:none;}
+  @media (max-width:480px){ .m-only,.m-only2{display:inline;} }
   .sub{margin:28px auto 0;max-width:700px;font-size:clamp(17px,1.7vw,22px);font-weight:400;color:rgba(255,255,255,.72);line-height:1.5;}
   .hero .btn-ghost{color:#6ab1ff;}
   .cta-row{margin-top:40px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
@@ -237,9 +237,9 @@
 <header class="hero">
   <div class="wrap">
     <img class="icon reveal" src="assets/app-icon.png" alt="FitForce App Icon" />
-    <div class="eyebrow reveal delay-1">Introducing FitForce</div>
-    <h1 class="h1 reveal delay-1">食事は写真で。<br/>筋トレは<br class="m-only"/><span class="grad">AIが設計</span>。</h1>
-    <p class="sub reveal delay-2">PFC管理とプロ目線のAI評価をひとつに。<br/>NSCA-CSCS資格者目線のAIが、あなたのトレーニングと食事を毎日サポート。</p>
+    <div class="eyebrow reveal delay-1">AI × FITNESS</div>
+    <h1 class="h1 reveal delay-1">AIが、<span class="grad">最強の自分</span>を<br/>設計する。<br/>君の限界を、<br class="m-only2"/><span class="grad">書き換える</span>。</h1>
+    <p class="sub reveal delay-2">食事も、筋トレも、AIが毎日設計。<br/>NSCA-CSCS資格者目線のAIが、あなたの可能性を最大化する。</p>
     <div class="cta-row reveal delay-3">
       <a class="appstore-badge" href="#" aria-disabled="true" aria-label="App Store で近日公開">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
