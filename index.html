@@ -15,108 +15,145 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet" />
 <style>
   :root{
-    --ink:#0b0b0d;
-    --ink-2:#3a3a3f;
-    --ink-3:#6e6e76;
+    --ink:#1d1d1f;
+    --ink-2:#424245;
+    --ink-3:#86868b;
     --bg:#ffffff;
     --bg-2:#f5f5f7;
-    --bg-3:#fafafc;
+    --bg-3:#fbfbfd;
     --line:rgba(0,0,0,0.08);
     --accent:#ff6b35;
     --accent-2:#7c5cff;
+    --apple-blue:#0071e3;
     --radius:22px;
-    --maxw:1080px;
+    --maxw:1120px;
   }
-  *{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased;}
-  html,body{background:var(--bg);color:var(--ink);font-family:'Inter','Noto Sans JP','SF Pro Text',-apple-system,BlinkMacSystemFont,'Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3',sans-serif;line-height:1.6;letter-spacing:.01em;}
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+  html{scroll-behavior:smooth;}
+  html,body{background:var(--bg);color:var(--ink);font-family:'Inter','Noto Sans JP','SF Pro Display','SF Pro Text',-apple-system,BlinkMacSystemFont,'Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3',sans-serif;line-height:1.5;letter-spacing:-.003em;}
   a{color:inherit;text-decoration:none;}
   img{max-width:100%;display:block;}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
 
+  /* reveal animations */
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity 1s cubic-bezier(.2,.6,.2,1),transform 1s cubic-bezier(.2,.6,.2,1);}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  .reveal.delay-1{transition-delay:.08s;}
+  .reveal.delay-2{transition-delay:.16s;}
+  .reveal.delay-3{transition-delay:.24s;}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+  }
+
   /* nav */
-  nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.78);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line);}
-  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:54px;}
-  nav .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;}
-  nav .brand img{width:24px;height:24px;border-radius:6px;}
-  nav .links{display:flex;gap:24px;font-size:13px;color:var(--ink-2);}
-  nav .links a:hover{color:var(--ink);}
+  nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.72);backdrop-filter:saturate(180%) blur(24px);-webkit-backdrop-filter:saturate(180%) blur(24px);border-bottom:1px solid var(--line);}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:1280px;}
+  nav .brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px;letter-spacing:-.01em;}
+  nav .brand img{width:22px;height:22px;border-radius:6px;}
+  nav .links{display:flex;gap:28px;font-size:12.5px;font-weight:400;color:var(--ink);opacity:.85;}
+  nav .links a{transition:opacity .2s ease;}
+  nav .links a:hover{opacity:.6;}
   @media (max-width:600px){ nav .links{display:none;} }
 
   /* hero */
-  .hero{padding:88px 0 56px;text-align:center;}
-  .hero .icon{width:96px;height:96px;border-radius:22px;margin:0 auto 28px;box-shadow:0 10px 40px rgba(0,0,0,.12),0 2px 8px rgba(0,0,0,.06);}
-  .eyebrow{font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.06em;text-transform:uppercase;margin-bottom:16px;}
-  .h1{font-size:clamp(36px,6vw,72px);font-weight:800;letter-spacing:-.02em;line-height:1.08;color:var(--ink);}
-  .h1 .grad{background:linear-gradient(120deg,var(--accent) 0%,var(--accent-2) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
-  .sub{margin:22px auto 0;max-width:640px;font-size:clamp(16px,1.6vw,19px);color:var(--ink-2);}
-  .cta-row{margin-top:36px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
-  .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;font-weight:600;font-size:15px;transition:transform .15s ease, box-shadow .15s ease, background .15s ease;}
-  .btn-primary{background:var(--ink);color:#fff;}
-  .btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(0,0,0,.18);}
-  .btn-ghost{background:var(--bg-2);color:var(--ink);}
-  .btn-ghost:hover{background:#ececef;}
+  .hero{padding:120px 0 40px;text-align:center;overflow:hidden;}
+  .hero .icon{width:104px;height:104px;border-radius:24px;margin:0 auto 32px;box-shadow:0 20px 50px rgba(0,0,0,.14),0 4px 10px rgba(0,0,0,.06);}
+  .eyebrow{font-size:14px;font-weight:600;color:var(--apple-blue);letter-spacing:.02em;margin-bottom:18px;}
+  .h1{font-size:clamp(44px,7.6vw,96px);font-weight:700;letter-spacing:-.035em;line-height:1.04;color:var(--ink);}
+  .h1 .grad{background:linear-gradient(120deg,#ff6b35 0%,#ff3478 45%,#7c5cff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .sub{margin:24px auto 0;max-width:680px;font-size:clamp(17px,1.7vw,22px);font-weight:400;color:var(--ink-2);line-height:1.45;}
+  .cta-row{margin-top:40px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:999px;font-weight:500;font-size:15px;letter-spacing:-.005em;transition:transform .25s cubic-bezier(.2,.6,.2,1), box-shadow .25s ease, background .2s ease;}
+  .btn-primary{background:var(--apple-blue);color:#fff;}
+  .btn-primary:hover{background:#0077ed;transform:scale(1.03);box-shadow:0 10px 30px rgba(0,113,227,.3);}
+  .btn-ghost{background:transparent;color:var(--apple-blue);}
+  .btn-ghost::after{content:'›';margin-left:2px;transition:transform .25s ease;}
+  .btn-ghost:hover::after{transform:translateX(4px);}
 
   /* hero showcase */
-  .showcase{margin:60px auto 0;max-width:1180px;padding:0 28px;display:flex;justify-content:center;gap:24px;flex-wrap:wrap;}
-  .showcase img{width:240px;border-radius:32px;box-shadow:0 30px 70px rgba(0,0,0,.18),0 8px 20px rgba(0,0,0,.06);}
-  .showcase img:nth-child(2){transform:translateY(-18px);}
-  @media (max-width:720px){ .showcase img{width:42vw;} .showcase img:nth-child(2){transform:none;} }
+  .showcase{margin:80px auto 0;max-width:1280px;padding:0 28px;display:flex;justify-content:center;gap:28px;flex-wrap:wrap;perspective:1200px;}
+  .showcase .device{width:260px;border-radius:46px;padding:10px;background:linear-gradient(180deg,#1a1a1f,#0a0a0d);box-shadow:0 40px 80px rgba(0,0,0,.22),0 12px 30px rgba(0,0,0,.08);transition:transform .8s cubic-bezier(.2,.6,.2,1);}
+  .showcase .device img{border-radius:36px;width:100%;display:block;}
+  .showcase .device:nth-child(1){transform:rotate(-2.5deg) translateY(8px);}
+  .showcase .device:nth-child(2){transform:translateY(-22px) scale(1.04);z-index:2;}
+  .showcase .device:nth-child(3){transform:rotate(2.5deg) translateY(8px);}
+  @media (max-width:720px){
+    .showcase{gap:14px;}
+    .showcase .device{width:42vw;padding:7px;border-radius:34px;}
+    .showcase .device img{border-radius:27px;}
+    .showcase .device:nth-child(1),.showcase .device:nth-child(3){transform:none;}
+    .showcase .device:nth-child(2){transform:translateY(-8px) scale(1.02);}
+  }
 
   /* sections */
-  section{padding:120px 0;}
+  section{padding:140px 0;position:relative;}
   section.alt{background:var(--bg-2);}
-  .kicker{font-size:13px;font-weight:600;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;}
-  .h2{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-.018em;line-height:1.15;}
-  .lede{margin-top:18px;max-width:640px;font-size:17px;color:var(--ink-2);}
+  .kicker{font-size:14px;font-weight:600;color:var(--apple-blue);letter-spacing:.01em;margin-bottom:14px;}
+  .h2{font-size:clamp(32px,4.5vw,56px);font-weight:700;letter-spacing:-.028em;line-height:1.08;color:var(--ink);}
+  .lede{margin-top:20px;max-width:680px;font-size:clamp(17px,1.4vw,21px);font-weight:400;color:var(--ink-2);line-height:1.5;}
 
-  .features{margin-top:60px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;}
-  .feature{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px;}
-  .feature .ic{width:40px;height:40px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(135deg,#fff1ea,#efeaff);font-size:20px;margin-bottom:14px;}
-  .feature h3{font-size:17px;font-weight:700;margin-bottom:8px;letter-spacing:-.005em;}
-  .feature p{color:var(--ink-2);font-size:14.5px;line-height:1.65;}
+  .features{margin-top:70px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;}
+  .feature{background:#fff;border:1px solid var(--line);border-radius:24px;padding:32px;transition:transform .4s cubic-bezier(.2,.6,.2,1), box-shadow .4s ease;}
+  .feature:hover{transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.08);}
+  .feature .ic{width:48px;height:48px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,#fff1ea,#efeaff);font-size:22px;margin-bottom:16px;}
+  .feature h3{font-size:19px;font-weight:600;margin-bottom:8px;letter-spacing:-.018em;}
+  .feature p{color:var(--ink-2);font-size:15px;line-height:1.55;}
 
   /* big alternating */
-  .duo{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+  .duo{display:grid;grid-template-columns:1.05fr .95fr;gap:80px;align-items:center;}
   .duo.reverse{direction:rtl;}
   .duo.reverse > *{direction:ltr;}
   .duo .shot{display:flex;justify-content:center;}
-  .duo .shot img{width:300px;border-radius:36px;box-shadow:0 30px 60px rgba(0,0,0,.16);}
-  @media (max-width:760px){ .duo{grid-template-columns:1fr;gap:36px;} .duo .shot img{width:60vw;max-width:300px;} }
+  /* iPhone frame */
+  .device-frame{position:relative;width:320px;border-radius:50px;padding:11px;background:linear-gradient(180deg,#2b2b30,#0a0a0d);box-shadow:0 50px 100px rgba(0,0,0,.18),0 18px 40px rgba(0,0,0,.08);transition:transform .6s cubic-bezier(.2,.6,.2,1);}
+  .device-frame img{border-radius:40px;width:100%;display:block;}
+  .device-frame:hover{transform:translateY(-8px);}
+  @media (max-width:760px){
+    .duo{grid-template-columns:1fr;gap:48px;text-align:left;}
+    .device-frame{width:70vw;max-width:320px;padding:9px;border-radius:42px;}
+    .device-frame img{border-radius:33px;}
+  }
 
   /* pro */
-  .pro-card{margin-top:50px;background:#0b0b0d;color:#fff;border-radius:28px;padding:56px;}
+  .pro-card{margin-top:60px;position:relative;overflow:hidden;background:linear-gradient(160deg,#1d1d22 0%,#0a0a0d 100%);color:#fff;border-radius:32px;padding:72px 64px;box-shadow:0 40px 80px rgba(0,0,0,.18);}
+  .pro-card::before{content:'';position:absolute;top:-50%;right:-20%;width:80%;height:200%;background:radial-gradient(circle at center,rgba(124,92,255,.22) 0%,transparent 50%);pointer-events:none;}
+  .pro-card::after{content:'';position:absolute;bottom:-50%;left:-20%;width:80%;height:200%;background:radial-gradient(circle at center,rgba(255,107,53,.18) 0%,transparent 50%);pointer-events:none;}
+  .pro-card > *{position:relative;z-index:1;}
   .pro-card .h2{color:#fff;}
-  .pro-card .lede{color:#c9c9d2;}
-  .pro-list{margin-top:28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px 24px;}
-  .pro-list li{list-style:none;display:flex;align-items:flex-start;gap:10px;font-size:15px;color:#e7e7ed;}
-  .pro-list li::before{content:'';margin-top:8px;width:6px;height:6px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));flex:none;}
-  .price-row{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:18px;}
-  .price{position:relative;background:#1a1a1f;border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:24px 26px;}
-  .price.featured{border-color:transparent;background:linear-gradient(135deg,rgba(255,107,53,.18),rgba(124,92,255,.18)),#1a1a1f;}
-  .price .plan{font-size:13px;font-weight:600;letter-spacing:.06em;color:#c9c9d2;text-transform:uppercase;}
-  .price .amount{margin-top:8px;display:flex;align-items:baseline;gap:6px;}
-  .price .yen{font-size:34px;font-weight:800;letter-spacing:-.02em;color:#fff;}
+  .pro-card .lede{color:#d6d6dc;}
+  .pro-card .kicker{color:#ff8e6b;}
+  .pro-list{margin-top:36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px 28px;}
+  .pro-list li{list-style:none;display:flex;align-items:flex-start;gap:12px;font-size:15.5px;color:#e7e7ed;font-weight:400;}
+  .pro-list li::before{content:'✓';margin-top:1px;font-size:14px;font-weight:700;color:#ff8e6b;flex:none;}
+  .price-row{margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .price{position:relative;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:22px;padding:28px 30px;backdrop-filter:blur(20px);}
+  .price.featured{border-color:rgba(255,142,107,.4);background:linear-gradient(135deg,rgba(255,107,53,.16),rgba(124,92,255,.16));}
+  .price .plan{font-size:13px;font-weight:600;letter-spacing:.04em;color:#c9c9d2;}
+  .price .amount{margin-top:10px;display:flex;align-items:baseline;gap:6px;}
+  .price .yen{font-size:42px;font-weight:700;letter-spacing:-.025em;color:#fff;}
   .price .per{font-size:14px;color:#a0a0a8;}
   .price .note{margin-top:8px;font-size:13px;color:#a0a0a8;}
-  .price .badge{position:absolute;top:-10px;right:18px;font-size:11px;font-weight:700;letter-spacing:.04em;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;padding:5px 10px;border-radius:999px;}
-  .pro-foot{margin-top:14px;font-size:12px;color:#8a8a92;line-height:1.7;}
-  @media (max-width:560px){ .price-row{grid-template-columns:1fr;} .pro-card{padding:36px 24px;} }
+  .price .badge{position:absolute;top:-12px;right:20px;font-size:11px;font-weight:700;letter-spacing:.04em;background:linear-gradient(135deg,#ff6b35,#7c5cff);color:#fff;padding:6px 12px;border-radius:999px;box-shadow:0 6px 18px rgba(255,107,53,.4);}
+  .pro-foot{margin-top:20px;font-size:12.5px;color:#86868b;line-height:1.7;}
+  @media (max-width:560px){ .price-row{grid-template-columns:1fr;} .pro-card{padding:48px 28px;border-radius:24px;} }
 
   /* faq */
-  details{border-top:1px solid var(--line);padding:22px 4px;}
+  details{border-top:1px solid var(--line);padding:24px 4px;}
   details:last-of-type{border-bottom:1px solid var(--line);}
-  summary{font-size:17px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;}
+  summary{font-size:19px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;letter-spacing:-.018em;transition:opacity .2s ease;}
+  summary:hover{opacity:.7;}
   summary::-webkit-details-marker{display:none;}
-  summary::after{content:'+';font-size:22px;font-weight:300;color:var(--ink-3);transition:transform .2s ease;}
+  summary::after{content:'+';font-size:26px;font-weight:300;color:var(--ink-3);transition:transform .3s cubic-bezier(.2,.6,.2,1);line-height:1;}
   details[open] summary::after{transform:rotate(45deg);}
-  details p{margin-top:12px;color:var(--ink-2);font-size:15px;}
+  details p{margin-top:14px;color:var(--ink-2);font-size:16px;line-height:1.65;max-width:760px;}
 
   /* footer */
-  footer{background:var(--bg-2);padding:48px 0 40px;border-top:1px solid var(--line);}
-  footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-size:13px;color:var(--ink-3);}
-  footer .links a{margin-left:18px;}
+  footer{background:var(--bg-2);padding:40px 0 36px;border-top:1px solid var(--line);}
+  footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:12.5px;color:var(--ink-3);}
+  footer .links a{margin-left:22px;transition:color .2s ease;}
   footer .links a:hover{color:var(--ink);}
-  @media (max-width:600px){ footer .wrap{flex-direction:column;} footer .links a{margin:0 18px 0 0;} }
+  @media (max-width:600px){ footer .wrap{flex-direction:column;} footer .links a{margin:0 20px 0 0;} }
 </style>
 </head>
 <body>
@@ -138,29 +175,29 @@
 
 <header class="hero">
   <div class="wrap">
-    <img class="icon" src="assets/app-icon.png" alt="FitForce App Icon" />
-    <div class="eyebrow">FitForce</div>
-    <h1 class="h1">食事は写真で。<br/>筋トレは<span class="grad">AIが設計</span>。</h1>
-    <p class="sub">PFC管理とプロ目線のAI評価をひとつに。NSCA-CSCS資格者目線のAIが、あなたのトレーニングと食事を毎日サポートします。</p>
-    <div class="cta-row">
+    <img class="icon reveal" src="assets/app-icon.png" alt="FitForce App Icon" />
+    <div class="eyebrow reveal delay-1">Introducing FitForce</div>
+    <h1 class="h1 reveal delay-1">食事は写真で。<br/>筋トレは<span class="grad">AIが設計</span>。</h1>
+    <p class="sub reveal delay-2">PFC管理とプロ目線のAI評価をひとつに。<br/>NSCA-CSCS資格者目線のAIが、あなたのトレーニングと食事を毎日サポート。</p>
+    <div class="cta-row reveal delay-3">
       <a class="btn btn-primary" href="#" aria-disabled="true">App Storeで入手（近日公開）</a>
       <a class="btn btn-ghost" href="#features">機能を見る</a>
     </div>
   </div>
-  <div class="showcase" aria-hidden="true">
-    <img src="assets/shot-meal.png" alt="" />
-    <img src="assets/shot-workout.png" alt="" />
-    <img src="assets/shot-calendar.png" alt="" />
+  <div class="showcase reveal delay-3" aria-hidden="true">
+    <div class="device"><img src="assets/shot-meal.png" alt="" /></div>
+    <div class="device"><img src="assets/shot-menu.png" alt="" /></div>
+    <div class="device"><img src="assets/shot-calorie.png" alt="" /></div>
   </div>
 </header>
 
 <section id="features">
   <div class="wrap">
-    <div class="kicker">Main Features</div>
-    <h2 class="h2">毎日のフィットネスを、もっとシンプルに。</h2>
-    <p class="lede">食事を写真で記録するだけ。筋トレメニューはAIが今日の目的に合わせて設計。あなたは行動に集中するだけです。</p>
+    <div class="kicker reveal">Main Features</div>
+    <h2 class="h2 reveal delay-1">毎日のフィットネスを、<br/>もっとシンプルに。</h2>
+    <p class="lede reveal delay-2">食事を写真で記録するだけ。筋トレメニューはAIが今日の目的に合わせて設計。あなたは行動に集中するだけです。</p>
 
-    <div class="features">
+    <div class="features reveal delay-2">
       <div class="feature">
         <div class="ic">📷</div>
         <h3>食事を写真でPFC記録</h3>
@@ -198,12 +235,12 @@
 <section class="alt">
   <div class="wrap">
     <div class="duo">
-      <div>
+      <div class="reveal">
         <div class="kicker">AI WORKOUT</div>
         <h2 class="h2">指定した部位で、<br/>自動でメニュー生成。</h2>
         <p class="lede">分割法・部位・経験レベル・利用環境・時間を選ぶだけ。AIがNSCA-CSCS資格者目線で本日のメニューを設計し、各種目に怪我予防のワンポイントまで提示します。</p>
       </div>
-      <div class="shot"><img src="assets/shot-menu.png" alt="部位指定でAI自動生成" /></div>
+      <div class="shot reveal delay-1"><div class="device-frame"><img src="assets/shot-menu.png" alt="部位指定でAI自動生成" /></div></div>
     </div>
   </div>
 </section>
@@ -211,12 +248,12 @@
 <section>
   <div class="wrap">
     <div class="duo reverse">
-      <div>
+      <div class="reveal">
         <div class="kicker">AI MEAL</div>
         <h2 class="h2">食事は、<br/>写真を撮るだけ。</h2>
         <p class="lede">朝・昼・夕・間食ごとに写真を撮るだけで、AIが食材を認識しカロリー・タンパク質・脂質・炭水化物を自動算出。1日の目標kcalと進捗もリアルタイムで見える化します。</p>
       </div>
-      <div class="shot"><img src="assets/shot-meal.png" alt="食事写真でPFC自動記録" /></div>
+      <div class="shot reveal delay-1"><div class="device-frame"><img src="assets/shot-meal.png" alt="食事写真でPFC自動記録" /></div></div>
     </div>
   </div>
 </section>
@@ -224,12 +261,12 @@
 <section class="alt">
   <div class="wrap">
     <div class="duo">
-      <div>
+      <div class="reveal">
         <div class="kicker">MEAL TEMPLATES</div>
         <h2 class="h2">定番メニューは、<br/>ワンタップで。</h2>
         <p class="lede">プリセット＋カスタムテンプレートで、毎日の食事記録を一瞬で。PFC値まで自動で表示されます。</p>
       </div>
-      <div class="shot"><img src="assets/shot-template.png" alt="食事テンプレ" /></div>
+      <div class="shot reveal delay-1"><div class="device-frame"><img src="assets/shot-template.png" alt="食事テンプレ" /></div></div>
     </div>
   </div>
 </section>
@@ -237,19 +274,19 @@
 <section>
   <div class="wrap">
     <div class="duo reverse">
-      <div>
+      <div class="reveal">
         <div class="kicker">CALORIE TARGET</div>
         <h2 class="h2">目標体重に合わせて、<br/>カロリーを自動算出。</h2>
         <p class="lede">現在体重・目標体重・運動レベルから、1日の目標カロリーとタンパク質量を自動算出。達成目標日まで自動でカウントダウンし、無理のないペースで導きます。</p>
       </div>
-      <div class="shot"><img src="assets/shot-calorie.png" alt="目標体重とカロリー管理" /></div>
+      <div class="shot reveal delay-1"><div class="device-frame"><img src="assets/shot-calorie.png" alt="目標体重とカロリー管理" /></div></div>
     </div>
   </div>
 </section>
 
 <section id="pro" class="alt">
   <div class="wrap">
-    <div class="pro-card">
+    <div class="pro-card reveal">
       <div class="kicker">FitForce Pro</div>
       <h2 class="h2">AIを、無制限に。</h2>
       <p class="lede">毎日のレビューと週次レビュー、マイルーティンとマイテンプレ。FitForceのすべてを引き出す。</p>
@@ -279,9 +316,9 @@
 
 <section id="faq">
   <div class="wrap">
-    <div class="kicker">FAQ</div>
-    <h2 class="h2">よくあるご質問</h2>
-    <div style="margin-top:36px;">
+    <div class="kicker reveal">FAQ</div>
+    <h2 class="h2 reveal delay-1">よくあるご質問</h2>
+    <div class="reveal delay-2" style="margin-top:44px;">
       <details>
         <summary>データはどこに保存されますか？</summary>
         <p>筋トレ・食事・体重などの記録は端末内に保存されます。AI評価機能を利用した際のみ、評価対象のデータがGoogleの生成AI（Gemini）に送信されます。氏名・メールアドレスなどの個人特定情報は一切送信しません。</p>
@@ -312,5 +349,23 @@
   </div>
 </footer>
 
+<script>
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function(el){ el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    els.forEach(function(el){ io.observe(el); });
+  })();
+</script>
 </body>
 </html>
