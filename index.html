@@ -363,6 +363,10 @@
 
 <script>
   (function(){
+    // Always start at top on reload (unless URL has a hash anchor)
+    if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+    if (!location.hash) { window.scrollTo(0, 0); }
+
     var els = document.querySelectorAll('.reveal');
     if (!('IntersectionObserver' in window)) {
       els.forEach(function(el){ el.classList.add('in'); });
