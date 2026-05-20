@@ -100,9 +100,11 @@
 
   /* hero — DARK IMPACT with photo */
   .hero{position:relative;padding:120px 0 80px;overflow:hidden;background-color:#000;color:#fff;}
-  .hero-bg{position:absolute;inset:0;background-image:url(assets/hero-desktop.png);background-size:cover;background-position:right center;background-repeat:no-repeat;z-index:0;}
+  .hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden;background-color:#000;}
+  .hero-bg video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:right center;}
+  .hero-bg img.fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:right center;}
   /* fade-to-black on left for text legibility */
-  .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#000 0%,rgba(0,0,0,.85) 30%,rgba(0,0,0,.4) 55%,transparent 75%);}
+  .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#000 0%,rgba(0,0,0,.85) 30%,rgba(0,0,0,.4) 55%,transparent 75%);z-index:2;pointer-events:none;}
   /* subtle blue glow accent */
   .hero::before{content:'';position:absolute;top:-200px;left:-200px;width:700px;height:700px;background:radial-gradient(circle at center,rgba(0,180,255,.18) 0%,transparent 65%);filter:blur(70px);pointer-events:none;z-index:1;}
   .hero .wrap{position:relative;z-index:2;max-width:1280px;}
@@ -136,7 +138,8 @@
 
   @media (max-width:760px){
     .hero{padding:0 0 60px;}
-    .hero-bg{background-image:url(assets/hero-mobile.png);background-position:center top;background-size:cover;background-repeat:no-repeat;height:110vw;top:0;bottom:auto;}
+    .hero-bg{height:110vw;top:0;bottom:auto;}
+    .hero-bg video{object-position:center top;}
     .hero-bg::after{background:linear-gradient(180deg,transparent 0%,transparent 55%,rgba(0,0,0,.7) 78%,#000 95%);}
     .hero-text{max-width:none;padding-top:calc(95vw);}
     .hero .icon{margin-bottom:18px;width:64px;height:64px;border-radius:16px;}
@@ -321,7 +324,12 @@
 </div>
 
 <header class="hero">
-  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-bg" aria-hidden="true">
+    <video autoplay muted loop playsinline preload="auto" poster="assets/hero-desktop.png">
+      <source src="assets/hero-loop.webm" type="video/webm" />
+      <source src="assets/hero-loop.mp4" type="video/mp4" />
+    </video>
+  </div>
   <div class="wrap">
     <div class="hero-text">
       <img class="icon reveal" src="assets/app-icon.png" alt="FitForce App Icon" />
