@@ -171,7 +171,7 @@
     .showcase .device{flex:0 0 auto;width:64vw !important;max-width:280px;scroll-snap-align:center;transform:none !important;}
   }
   .showcase .device{width:260px;border-radius:46px;padding:10px;background:linear-gradient(180deg,#1a1a1f,#0a0a0d);box-shadow:0 40px 80px rgba(0,0,0,.22),0 12px 30px rgba(0,0,0,.08);transition:transform .8s cubic-bezier(.2,.6,.2,1);}
-  .showcase .device img{border-radius:36px;width:100%;display:block;}
+  .showcase .device img{border-radius:36px;width:100%;aspect-ratio:1206/2622;object-fit:cover;object-position:top;display:block;}
   .showcase .device:nth-child(1){transform:rotate(-2.5deg) translateY(8px);}
   .showcase .device:nth-child(2){transform:translateY(-22px) scale(1.04);z-index:2;}
   .showcase .device:nth-child(3){transform:rotate(2.5deg) translateY(8px);}
@@ -424,6 +424,19 @@
   <div class="wrap">
     <div class="duo reverse">
       <div class="reveal">
+        <div class="kicker">MANUAL PICK</div>
+        <h2 class="h2">気分に合わせて、<br/>手動でも選べる。</h2>
+        <p class="lede">AI任せだけじゃない。部位フィルター付きの種目ライブラリから好きな種目を選んで、自分で組み立てるのも自由自在。お気に入り種目はブックマークでワンタップ呼び出し。</p>
+      </div>
+      <div class="shot reveal delay-1"><div class="device-frame"><img src="assets/shot-exercise-picker.png" alt="手動で種目を選ぶ" /></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="duo">
+      <div class="reveal">
         <div class="kicker">AI MEAL</div>
         <h2 class="h2">食事は、<br/>写真を撮るだけ。</h2>
         <p class="lede">朝・昼・夕・間食ごとに写真を撮るだけで、AIが食材を認識しカロリー・タンパク質・脂質・炭水化物を自動算出。1日の目標kcalと進捗もリアルタイムで見える化します。</p>
@@ -433,7 +446,7 @@
   </div>
 </section>
 
-<section class="alt">
+<section>
   <div class="wrap">
     <div class="duo">
       <div class="reveal">
@@ -446,9 +459,22 @@
   </div>
 </section>
 
-<section>
+<section class="alt">
   <div class="wrap">
     <div class="duo reverse">
+      <div class="reveal">
+        <div class="kicker">HISTORY</div>
+        <h2 class="h2">カレンダーひとつで、<br/>食事も筋トレも記録。</h2>
+        <p class="lede">日付ごとに筋トレ・食事の履歴を一覧表示。部位フィルター、月別の総挙上量・実施日数も自動集計。継続のモチベーションが、ひと目で見える。</p>
+      </div>
+      <div class="shot reveal delay-1"><div class="device-frame"><img src="assets/shot-history.png" alt="カレンダーで食事・筋トレ履歴管理" /></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="duo">
       <div class="reveal">
         <div class="kicker">CALORIE TARGET</div>
         <h2 class="h2">目標体重に合わせて、<br/>カロリーを自動算出。</h2>
