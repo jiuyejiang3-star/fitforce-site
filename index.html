@@ -13,6 +13,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet" />
+<script>
+  // Disable browser scroll restoration as early as possible
+  if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+</script>
 <style>
   :root{
     --ink:#1d1d1f;
@@ -514,9 +518,13 @@
 
 <script>
   (function(){
-    // Always start at top on reload (unless URL has a hash anchor)
-    if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
-    if (!location.hash) { window.scrollTo(0, 0); }
+    // Force scroll to top on reload (unless URL has a hash anchor)
+    if (!location.hash) {
+      window.scrollTo(0, 0);
+      window.addEventListener('load', function(){
+        if (!location.hash) window.scrollTo(0, 0);
+      });
+    }
 
     var els = document.querySelectorAll('.reveal');
     if (!('IntersectionObserver' in window)) {
