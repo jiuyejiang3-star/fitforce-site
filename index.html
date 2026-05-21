@@ -373,12 +373,12 @@
   .sparkles span{position:absolute;width:4px;height:4px;background:radial-gradient(circle,rgba(255,255,255,.95),rgba(255,255,255,0));border-radius:50%;animation:sparkle 5s ease-in-out infinite;filter:blur(.3px);}
   @keyframes sparkle{0%,100%{opacity:0;transform:scale(.2);}50%{opacity:1;transform:scale(1.4);}}
 
-  /* 14. Lamp effect（h2 上方の光円錐） */
-  .lamp{position:relative;}
-  .lamp::before{content:"";position:absolute;top:-110px;left:50%;transform:translateX(-50%);width:580px;height:160px;background:conic-gradient(from 180deg at 50% 0%,transparent 0deg,rgba(255,107,53,.32) 28deg,rgba(124,92,255,.42) 60deg,rgba(34,211,238,.30) 92deg,transparent 120deg);filter:blur(28px);opacity:.85;pointer-events:none;animation:lamp-pulse 5s ease-in-out infinite;z-index:0;}
+  /* 14. Lamp effect（section 内側上端に光円錐） */
+  .lamp{position:relative;overflow:hidden;}
+  .lamp::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:520px;height:140px;background:conic-gradient(from 180deg at 50% 0%,transparent 0deg,rgba(255,107,53,.30) 30deg,rgba(124,92,255,.40) 60deg,rgba(34,211,238,.28) 90deg,transparent 120deg);filter:blur(34px);opacity:.7;pointer-events:none;animation:lamp-pulse 5s ease-in-out infinite;z-index:0;}
   .lamp > *{position:relative;z-index:1;}
-  @keyframes lamp-pulse{0%,100%{opacity:.6;}50%{opacity:1;}}
-  @media (max-width:600px){ .lamp::before{width:320px;height:120px;top:-80px;} }
+  @keyframes lamp-pulse{0%,100%{opacity:.5;}50%{opacity:.85;}}
+  @media (max-width:600px){ .lamp::before{width:300px;height:110px;filter:blur(28px);} }
 
   /* 15. Particle background（流れる粒子） */
   .particles{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:2;}
