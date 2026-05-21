@@ -348,6 +348,40 @@
   /* 7. 3D tilt */
   .tilt-wrap{transform-style:preserve-3d;perspective:1200px;}
   .tilt-target{transition:transform .35s cubic-bezier(.2,.7,.2,1);transform-style:preserve-3d;will-change:transform;}
+
+  /* 8. Word Rotation（ヒーロー文字切替） */
+  .word-rotate{display:inline-block;transition:opacity .35s ease,transform .35s ease;will-change:opacity,transform;}
+  .word-rotate.swap{opacity:0;transform:translateY(-12px);}
+
+  /* 9. Floating CTA */
+  .floating-cta{position:fixed;bottom:24px;right:24px;display:inline-flex;align-items:center;gap:10px;padding:14px 22px;background:#000;color:#fff;border-radius:999px;font-weight:700;font-size:14px;box-shadow:0 12px 32px rgba(0,0,0,.28);opacity:0;transform:translateY(60px);transition:opacity .5s ease,transform .5s ease,box-shadow .3s ease;z-index:9999;text-decoration:none;pointer-events:none;}
+  .floating-cta.show{opacity:1;transform:translateY(0);pointer-events:auto;}
+  .floating-cta:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 18px 44px rgba(255,107,53,.35);}
+  .floating-cta svg{flex-shrink:0;}
+  @media (max-width:560px){ .floating-cta{bottom:88px;right:16px;padding:12px 18px;font-size:13px;} }
+
+  /* 10. Magnetic CTA */
+  .magnetic{transition:transform .3s cubic-bezier(.2,.7,.2,1);will-change:transform;display:inline-block;}
+
+  /* 11. Shine on device-frame */
+  .device-frame{overflow:hidden;}
+  .device-frame::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.18) 48%,rgba(255,255,255,.45) 50%,rgba(255,255,255,.18) 52%,transparent 65%);transform:translateX(-150%);transition:transform 1.1s ease;pointer-events:none;border-radius:inherit;z-index:2;}
+  .device-frame:hover::after{transform:translateX(150%);}
+
+  /* 12. Sparkles on hero */
+  .sparkles{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:2;}
+  .sparkles span{position:absolute;width:4px;height:4px;background:radial-gradient(circle,rgba(255,255,255,.95),rgba(255,255,255,0));border-radius:50%;animation:sparkle 5s ease-in-out infinite;filter:blur(.3px);}
+  @keyframes sparkle{0%,100%{opacity:0;transform:scale(.2);}50%{opacity:1;transform:scale(1.4);}}
+
+  /* 13. Animated Beam（写真 → AI → PFC） */
+  .beam-flow{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:32px auto 0;max-width:760px;}
+  .beam-node{flex-shrink:0;width:72px;height:72px;border-radius:18px;display:inline-flex;align-items:center;justify-content:center;background:#fff;color:var(--accent);box-shadow:0 6px 24px rgba(255,107,53,.18);border:1px solid var(--line);position:relative;z-index:1;}
+  .beam-node.alt{color:var(--accent-2);box-shadow:0 6px 24px rgba(124,92,255,.18);}
+  .beam-node-label{font-size:11px;font-weight:800;letter-spacing:.05em;color:var(--ink-2);margin-top:6px;text-align:center;}
+  .beam-node-wrap{display:inline-flex;flex-direction:column;align-items:center;gap:4px;}
+  .beam-line{flex:1;min-width:40px;height:3px;background:linear-gradient(90deg,transparent,var(--accent) 30%,var(--accent-2) 70%,transparent);background-size:200% 100%;animation:beam-flow 2.5s linear infinite;border-radius:2px;}
+  @keyframes beam-flow{to{background-position:-200% 0;}}
+  @media (max-width:600px){ .beam-node{width:60px;height:60px;border-radius:14px;} .beam-line{min-width:20px;} }
 </style>
 </head>
 <body>
@@ -378,6 +412,18 @@
 
 <header class="hero" id="hero-spotlight">
   <div class="spotlight" aria-hidden="true"></div>
+  <div class="sparkles" aria-hidden="true">
+    <span style="top:18%;left:12%;animation-delay:0s;"></span>
+    <span style="top:32%;left:78%;animation-delay:.8s;width:5px;height:5px;"></span>
+    <span style="top:55%;left:24%;animation-delay:1.6s;"></span>
+    <span style="top:70%;left:88%;animation-delay:2.4s;width:6px;height:6px;"></span>
+    <span style="top:25%;left:48%;animation-delay:3.2s;"></span>
+    <span style="top:80%;left:42%;animation-delay:4s;"></span>
+    <span style="top:12%;left:62%;animation-delay:.4s;width:3px;height:3px;"></span>
+    <span style="top:62%;left:8%;animation-delay:1.2s;"></span>
+    <span style="top:42%;left:92%;animation-delay:2s;"></span>
+    <span style="top:88%;left:18%;animation-delay:2.8s;width:5px;height:5px;"></span>
+  </div>
   <div class="hero-bg" aria-hidden="true">
     <video autoplay muted loop playsinline preload="auto" poster="assets/hero-desktop.png">
       <source src="assets/hero-loop.webm" type="video/webm" />
@@ -388,7 +434,7 @@
     <div class="hero-text">
       <img class="icon reveal" src="assets/app-icon.png" alt="FitForce App Icon" />
       <div class="eyebrow reveal delay-1">AI × FITNESS</div>
-      <h1 class="h1 reveal delay-1">AIが、<span class="grad">最強の自分</span>を<br/>設計する。<br/>あなたの限界を、<br/><span class="grad">書き換える</span>。</h1>
+      <h1 class="h1 reveal delay-1">AIが、<span class="grad word-rotate" id="word-rotate">最強の自分</span>を<br/>設計する。<br/>あなたの限界を、<br/><span class="grad">書き換える</span>。</h1>
       <p class="sub reveal delay-2">食事も、筋トレも、AIが毎日設計。<br/>NSCA-CSCS資格者目線のAIが、<br class="m-only"/>あなたの可能性を最大化する。</p>
       <div class="hero-features reveal delay-3">
         <div class="hf-item">
@@ -426,7 +472,7 @@
         </div>
       </div>
       <div class="cta-row reveal delay-4">
-        <a class="appstore-badge" href="#" aria-disabled="true" aria-label="App Store で近日公開">
+        <a class="appstore-badge magnetic" href="#" aria-disabled="true" aria-label="App Store で近日公開">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
           </svg>
@@ -514,6 +560,30 @@
         </div>
         <h3>端末内に保存</h3>
         <p>記録はあなたの iPhone に。AI評価時のみ匿名データを送信。</p>
+      </div>
+    </div>
+
+    <!-- Animated Beam：写真→AI→PFCを線で繋ぐ -->
+    <div class="beam-flow" aria-hidden="true">
+      <div class="beam-node-wrap">
+        <div class="beam-node">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3Z"/><circle cx="12" cy="13" r="3.5"/></svg>
+        </div>
+        <span class="beam-node-label">食事写真</span>
+      </div>
+      <div class="beam-line"></div>
+      <div class="beam-node-wrap">
+        <div class="beam-node alt">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4.5 4.5 0 0 0-4.5 4.5v.5a4 4 0 0 0-2 7.4 4 4 0 0 0 2 7.5V22h9V21.9a4 4 0 0 0 2-7.5 4 4 0 0 0-2-7.4v-.5A4.5 4.5 0 0 0 12 2Z"/><path d="M12 2v20"/></svg>
+        </div>
+        <span class="beam-node-label">AI 解析</span>
+      </div>
+      <div class="beam-line"></div>
+      <div class="beam-node-wrap">
+        <div class="beam-node">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>
+        </div>
+        <span class="beam-node-label">PFC 自動算出</span>
       </div>
     </div>
   </div>
@@ -720,7 +790,7 @@
       <strong>FitForce</strong>
       <span>AIが、最強の自分を設計する。</span>
     </div>
-    <a class="appstore-badge" href="#" aria-disabled="true" aria-label="App Store で近日公開">
+    <a class="appstore-badge magnetic" href="#" aria-disabled="true" aria-label="App Store で近日公開">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
       </svg>
@@ -741,6 +811,12 @@
     </div>
   </div>
 </footer>
+
+<!-- Floating CTA：スクロール時に右下に出現 -->
+<a class="floating-cta" href="#pro" aria-label="Pro プランを見る">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 12.04c0-2.4 1.96-3.55 2.05-3.6-1.12-1.63-2.86-1.85-3.48-1.88-1.48-.15-2.89.87-3.65.87-.76 0-1.92-.85-3.15-.83-1.62.02-3.12.94-3.95 2.4-1.69 2.93-.43 7.26 1.22 9.63.8 1.16 1.76 2.47 3.03 2.42 1.22-.05 1.68-.79 3.15-.79 1.47 0 1.88.79 3.17.77 1.31-.02 2.14-1.18 2.94-2.35.93-1.35 1.31-2.66 1.33-2.73-.03-.01-2.55-.98-2.58-3.89zM14.61 4.94c.67-.81 1.12-1.94.99-3.06-.96.04-2.13.64-2.82 1.45-.62.72-1.16 1.87-1.02 2.97 1.07.08 2.17-.55 2.85-1.36z"/></svg>
+  <span>App Store で見る</span>
+</a>
 
 <script>
   (function(){
@@ -883,6 +959,51 @@
       var sp = hero.querySelector('.spotlight');
       if (sp){ sp.style.setProperty('--mx', x + '%'); sp.style.setProperty('--my', y + '%'); }
     }, { passive: true });
+  })();
+
+  // 8. Word Rotation
+  (function(){
+    var el = document.getElementById('word-rotate');
+    if (!el) return;
+    var words = ['最強の自分','最高の習慣','理想の体'];
+    var idx = 0;
+    setInterval(function(){
+      el.classList.add('swap');
+      setTimeout(function(){
+        idx = (idx + 1) % words.length;
+        el.textContent = words[idx];
+        el.classList.remove('swap');
+      }, 350);
+    }, 3000);
+  })();
+
+  // 9. Floating CTA show/hide on scroll
+  (function(){
+    var fab = document.querySelector('.floating-cta');
+    if (!fab) return;
+    var threshold = 600;
+    function update(){
+      if (window.scrollY > threshold) fab.classList.add('show');
+      else fab.classList.remove('show');
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+
+  // 10. Magnetic CTA
+  (function(){
+    if (window.matchMedia && window.matchMedia('(pointer:coarse)').matches) return;
+    document.querySelectorAll('.magnetic').forEach(function(el){
+      el.addEventListener('mousemove', function(ev){
+        var r = el.getBoundingClientRect();
+        var x = ev.clientX - r.left - r.width / 2;
+        var y = ev.clientY - r.top - r.height / 2;
+        el.style.transform = 'translate(' + (x * 0.25).toFixed(1) + 'px, ' + (y * 0.25).toFixed(1) + 'px)';
+      }, { passive: true });
+      el.addEventListener('mouseleave', function(){
+        el.style.transform = '';
+      }, { passive: true });
+    });
   })();
 
   // 7. 3D tilt（device-frame）
