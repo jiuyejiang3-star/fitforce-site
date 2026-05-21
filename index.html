@@ -339,8 +339,10 @@
   .bento-tile.large p{color:rgba(255,255,255,.78);font-size:14.5px;}
   .bento-tile .bento-eyebrow{font-size:11px;font-weight:800;letter-spacing:.2em;color:#ff8c66;}
   .bento-tile .bento-icon{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,rgba(255,107,53,.12),rgba(124,92,255,.12));color:var(--accent);margin-bottom:14px;}
-  .bento-tile .bento-stat{display:inline-block;font-size:48px;font-weight:900;background:linear-gradient(120deg,var(--accent) 0%,var(--accent-2) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1;vertical-align:baseline;}
-  .bento-tile .bento-stat-label{display:inline;font-size:14px;color:var(--ink-2);font-weight:700;margin-left:8px;letter-spacing:0;text-transform:none;}
+  .bento-tile .bento-stat-line{display:flex;align-items:baseline;gap:4px;line-height:1;margin-top:4px;}
+  .bento-tile .bento-stat{font-size:48px;font-weight:900;background:linear-gradient(120deg,var(--accent) 0%,var(--accent-2) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1;}
+  .bento-tile .bento-unit{font-size:22px;font-weight:800;color:var(--ink);line-height:1;}
+  .bento-tile .bento-stat-label{font-size:13px;color:var(--ink-2);font-weight:600;margin-top:8px;letter-spacing:0;text-transform:none;}
   .bento-tile .bento-blob{position:absolute;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(255,107,53,.18),transparent 70%);filter:blur(30px);pointer-events:none;}
   .bento-tile .bento-blob.tr{top:-60px;right:-60px;background:radial-gradient(circle,rgba(124,92,255,.35),transparent 70%);}
   .bento-tile .bento-blob.bl{bottom:-60px;left:-60px;background:radial-gradient(circle,rgba(255,107,53,.20),transparent 70%);}
@@ -488,15 +490,15 @@
         <div class="bento-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3Z"/><circle cx="12" cy="13" r="3"/></svg>
         </div>
-        <div class="bento-stat counter" data-target="30">0</div>
-        <div class="bento-stat-label">秒で食事記録</div>
+        <div class="bento-stat-line"><span class="bento-stat counter" data-target="30">0</span><span class="bento-unit">秒</span></div>
+        <div class="bento-stat-label">で食事を記録</div>
       </div>
       <div class="bento-tile">
         <div class="bento-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6.5 6.5 11 11"/><path d="m21 21-1-1"/><path d="m3 3 1 1"/><path d="m18 22 4-4"/><path d="m2 6 4-4"/><path d="m3 10 7-7"/><path d="m14 21 7-7"/></svg>
         </div>
-        <div class="bento-stat counter" data-target="200">0</div>
-        <div class="bento-stat-label">＋ 種目に対応</div>
+        <div class="bento-stat-line"><span class="bento-stat counter" data-target="200">0</span><span class="bento-unit">＋種目</span></div>
+        <div class="bento-stat-label">に対応</div>
       </div>
       <div class="bento-tile wide">
         <div class="bento-blob bl"></div>
@@ -510,8 +512,8 @@
         <div class="bento-icon">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
         </div>
-        <div class="bento-stat counter" data-target="24">0</div>
-        <div class="bento-stat-label">時間 AI が待機</div>
+        <div class="bento-stat-line"><span class="bento-stat counter" data-target="24">0</span><span class="bento-unit">時間</span></div>
+        <div class="bento-stat-label">AI が待機</div>
       </div>
       <div class="bento-tile">
         <div class="bento-icon">
