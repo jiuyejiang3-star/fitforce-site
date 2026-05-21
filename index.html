@@ -304,18 +304,11 @@
   .marquee-item::before{content:"";width:6px;height:6px;border-radius:50%;background:linear-gradient(135deg,#22d3ee,#6366f1);box-shadow:0 0 12px rgba(34,211,238,.6);}
   @keyframes marquee-scroll{to{transform:translateX(-50%);}}
 
-  /* 2. Border Beam（border + 2層background でグラデ枠を流す） */
-  .pro-card.border-beam{
-    border:2px solid transparent;
-    background-image:
-      linear-gradient(160deg,#1d1d22 0%,#0a0a0d 100%),
-      linear-gradient(135deg,#ff6b35,#7c5cff 30%,#22d3ee 55%,#ff6b35 85%);
-    background-origin:padding-box,border-box;
-    background-clip:padding-box,border-box;
-    background-size:auto,300% 300%;
-    animation:beam-move 8s ease-in-out infinite;
-  }
-  @keyframes beam-move{0%,100%{background-position:0 0,0% 50%;}50%{background-position:0 0,100% 50%;}}
+  /* 2. Border Beam（wrap 構造で実装、モバイル Safari 安定版） */
+  .border-beam{position:relative;padding:2px;border-radius:34px;background:linear-gradient(135deg,#ff6b35,#7c5cff 30%,#22d3ee 60%,#ff6b35 90%);background-size:300% 300%;animation:beam-move 8s ease-in-out infinite;margin-top:60px;}
+  .border-beam > .pro-card{margin-top:0;border-radius:32px;}
+  @keyframes beam-move{0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
+  @media (max-width:560px){ .border-beam{border-radius:26px;} .border-beam > .pro-card{border-radius:24px;} }
 
   /* 3. Device frame glow hover */
   .device-frame{transition:transform .6s cubic-bezier(.2,.7,.2,1),box-shadow .6s ease,filter .6s ease;will-change:transform;}
@@ -668,7 +661,7 @@
 
 <section id="pro" class="alt">
   <div class="wrap">
-    <div class="pro-card reveal border-beam">
+    <div class="border-beam reveal"><div class="pro-card">
       <div class="kicker">FitForce Pro</div>
       <h2 class="h2">AIを、無制限に。</h2>
       <p class="lede">毎日のレビューと週次レビュー、マイルーティンとマイテンプレ。FitForceのすべてを引き出す。</p>
@@ -692,7 +685,7 @@
         </div>
       </div>
       <p class="pro-foot">価格はすべて税込です。サブスクリプションはApple IDに請求され、解約しない限り自動更新されます。Apple ID のサブスクリプション管理画面からいつでも解約できます。</p>
-    </div>
+    </div></div>
   </div>
 </section>
 
