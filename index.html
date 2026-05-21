@@ -394,6 +394,60 @@
   .beam-line{flex:1;min-width:40px;height:3px;background:linear-gradient(90deg,transparent,var(--accent) 30%,var(--accent-2) 70%,transparent);background-size:200% 100%;animation:beam-flow 2.5s linear infinite;border-radius:2px;}
   @keyframes beam-flow{to{background-position:-200% 0;}}
   @media (max-width:600px){ .beam-node{width:60px;height:60px;border-radius:14px;} .beam-line{min-width:20px;} }
+
+  /* === Next Features (Coming Soon) === */
+  #roadmap{padding:96px 0;background:linear-gradient(180deg,var(--bg-2) 0%,#fafafa 60%,#fff 100%);position:relative;overflow:hidden;}
+  #roadmap::before{content:"";position:absolute;top:-180px;left:-120px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(255,107,53,.10),transparent 60%);filter:blur(60px);pointer-events:none;}
+  #roadmap::after{content:"";position:absolute;bottom:-200px;right:-160px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(124,92,255,.10),transparent 60%);filter:blur(60px);pointer-events:none;}
+
+  .nf-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:22px;margin-top:56px;position:relative;z-index:1;}
+  .nf-card{position:relative;background:rgba(255,255,255,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(0,0,0,.06);border-radius:24px;padding:24px;overflow:hidden;transition:transform .5s cubic-bezier(.2,.6,.2,1),border-color .5s,box-shadow .5s;display:flex;flex-direction:column;}
+  .nf-card::before{content:"";position:absolute;inset:-1px;border-radius:24px;padding:1px;background:linear-gradient(135deg,transparent 30%,rgba(255,107,53,.4),rgba(124,92,255,.4),transparent 70%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .5s;}
+  .nf-card:hover{transform:translateY(-6px);border-color:rgba(0,0,0,.10);box-shadow:0 20px 50px rgba(0,0,0,.08);}
+  .nf-card:hover::before{opacity:1;}
+
+  .nf-size-hero{grid-column:span 7;}
+  .nf-size-tall{grid-column:span 5;}
+  .nf-size-med{grid-column:span 6;}
+  .nf-size-third{grid-column:span 4;}
+  .nf-size-wide{grid-column:span 8;}
+
+  .nf-shot{position:relative;width:100%;aspect-ratio:9/19.5;border-radius:18px;overflow:hidden;background:linear-gradient(135deg,#0a0a14 0%,#1a1a2e 60%,#16213e 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06),0 12px 30px rgba(0,0,0,.18);margin-bottom:22px;flex-shrink:0;}
+  .nf-shot img{width:100%;height:100%;object-fit:cover;display:block;}
+  .nf-shot.bg-cover img{object-position:top;}
+  .nf-shot.bg-bottom img{object-position:bottom;}
+
+  /* Hero (large) variant のショットは中央寄せで大きく */
+  .nf-size-hero .nf-shot{aspect-ratio:9/16;}
+
+  /* 横長ワイドカードでは画像を背景帯として小さく */
+  .nf-size-wide{display:grid;grid-template-columns:200px 1fr;gap:24px;align-items:center;}
+  .nf-size-wide .nf-shot{aspect-ratio:9/19.5;margin-bottom:0;}
+  .nf-size-wide .nf-body{padding:0;}
+
+  .nf-body{padding:4px 4px 0;flex:1;display:flex;flex-direction:column;gap:8px;}
+  .nf-tag{display:inline-flex;align-items:center;gap:6px;width:fit-content;font-size:11px;font-weight:800;letter-spacing:.06em;padding:4px 10px;border-radius:100px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;text-transform:uppercase;}
+  .nf-tag.tag-soft{background:rgba(255,107,53,.10);color:var(--accent);}
+  .nf-tag.tag-soft-purple{background:rgba(124,92,255,.10);color:var(--accent-2);}
+  .nf-card h3{font-size:22px;font-weight:800;letter-spacing:-.02em;line-height:1.3;color:var(--ink);margin:6px 0 0;}
+  .nf-card p{font-size:14.5px;color:var(--ink-2);line-height:1.65;}
+  .nf-card .nf-bullet{display:flex;align-items:flex-start;gap:8px;font-size:13.5px;color:var(--ink-2);}
+  .nf-card .nf-bullet::before{content:"●";color:var(--accent);font-size:9px;margin-top:6px;flex-shrink:0;}
+
+  .nf-version{position:absolute;top:18px;right:20px;font-size:11px;font-weight:900;letter-spacing:.08em;color:var(--ink-3);background:rgba(255,255,255,.7);padding:4px 8px;border-radius:8px;border:1px solid rgba(0,0,0,.04);z-index:2;}
+
+  /* Roadmap timeline header */
+  .nf-timeline{display:flex;justify-content:center;gap:32px;margin-top:32px;flex-wrap:wrap;}
+  .nf-tl-item{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--ink-2);}
+  .nf-tl-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(255,107,53,.15);}
+  .nf-tl-item.purple .nf-tl-dot{background:var(--accent-2);box-shadow:0 0 0 4px rgba(124,92,255,.15);}
+
+  @media (max-width:880px){
+    .nf-grid{grid-template-columns:1fr;gap:18px;}
+    .nf-size-hero, .nf-size-tall, .nf-size-med, .nf-size-third, .nf-size-wide{grid-column:span 1;}
+    .nf-size-wide{grid-template-columns:1fr;}
+    .nf-size-wide .nf-shot{aspect-ratio:9/16;margin-bottom:18px;}
+  }
 </style>
 </head>
 <body>
@@ -738,6 +792,95 @@
         <p class="lede">Mifflin-St Jeor 式で BMR・TDEE を精密算出。週あたりの変化量と1日の調整カロリーまで自動で提示し、「健康的な減量ペース」かをアプリが判定。無理のない目標設定をサポートします。</p>
       </div>
       <div class="shot reveal delay-1"><div class="device-frame"><img src="assets/shot-calorie-result.png" alt="BMR・TDEEを自動計算し目標カロリーを提示" /></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="roadmap">
+  <div class="wrap">
+    <div class="kicker reveal" style="color:var(--accent-2);">COMING SOON</div>
+    <h2 class="h2 reveal delay-1">次のアップデートで、もっと強くなる</h2>
+    <p class="lede reveal delay-2">App Store 公開後すぐに、9つの機能を段階的にリリース。<br>「続けるほど見える、結果が出る」を、もっと明確に。</p>
+
+    <div class="nf-timeline reveal delay-3">
+      <div class="nf-tl-item"><span class="nf-tl-dot"></span><span>v1.0.1 継続&可視化</span></div>
+      <div class="nf-tl-item"><span class="nf-tl-dot"></span><span>v1.1 Apple Watch連動</span></div>
+      <div class="nf-tl-item purple"><span class="nf-tl-dot"></span><span>v1.2 AI 提案強化</span></div>
+      <div class="nf-tl-item purple"><span class="nf-tl-dot"></span><span>v2.0 iCloud 同期</span></div>
+    </div>
+
+    <div class="nf-grid">
+
+      <article class="nf-card nf-size-hero reveal">
+        <span class="nf-version">v1.0.1</span>
+        <div class="nf-shot bg-cover"><img src="assets/next-features/11-weight-forecast.png" alt="体重チャートと未来予測グラフ" loading="lazy"></div>
+        <div class="nf-body">
+          <span class="nf-tag">未来予測グラフ</span>
+          <h3>毎日記録するだけで、ゴール日が見える。</h3>
+          <p>過去の体重トレンドから AI が外挿し、目標到達の予測日を金色の点線で描画。「あと32日で60kg到達」が一目でわかる。続ける意味が、数字で証明される。</p>
+        </div>
+      </article>
+
+      <article class="nf-card nf-size-tall reveal delay-1">
+        <span class="nf-version">v1.2</span>
+        <div class="nf-shot bg-cover"><img src="assets/next-features/15-active-workout.png" alt="プログレッシブオーバーロード提案" loading="lazy"></div>
+        <div class="nf-body">
+          <span class="nf-tag tag-soft-purple">プログレッシブ・オーバーロード</span>
+          <h3>「前回 72.5kg×8 → 今日 75kg×7」</h3>
+          <p>前回の記録から AI が次の重量・レップを自動提案。ワンタップで全セットに反映できる。停滞しないトレーニング設計を、毎回自動で。</p>
+        </div>
+      </article>
+
+      <article class="nf-card nf-size-med reveal delay-2">
+        <span class="nf-version">v1.2</span>
+        <div class="nf-shot bg-cover"><img src="assets/next-features/04-stats-filled.png" alt="部位別ボリュームと1RM推移グラフ" loading="lazy"></div>
+        <div class="nf-body">
+          <span class="nf-tag">部位別 / 推定1RM</span>
+          <h3>成長が、グラフで証明される。</h3>
+          <p>部位別の総挙上量を棒グラフで、Epley 式による推定1RM 推移を折れ線グラフで表示。自己ベスト更新ポイントには ★ マーカー。</p>
+        </div>
+      </article>
+
+      <article class="nf-card nf-size-med reveal delay-3">
+        <span class="nf-version">v1.2</span>
+        <div class="nf-shot bg-cover"><img src="assets/next-features/18-complement-sheet.png" alt="食事写真から不足栄養をAI提案" loading="lazy"></div>
+        <div class="nf-body">
+          <span class="nf-tag tag-soft-purple">AI 栄養補完</span>
+          <h3>「あと何食べる？」に、AIが答える。</h3>
+          <p>今食べたものの写真を撮るだけで、残り目標 PFC を満たす具体的な食品を AI が提案。コンビニで買える商品名まで、ワンタップで食事に追加。</p>
+        </div>
+      </article>
+
+      <article class="nf-card nf-size-third reveal">
+        <span class="nf-version">v1.0.1</span>
+        <div class="nf-shot bg-cover"><img src="assets/next-features/08-current.png" alt="ストリーク12日連続と30日チャレンジ" loading="lazy"></div>
+        <div class="nf-body">
+          <span class="nf-tag tag-soft">継続記録</span>
+          <h3>続けた日数が、勲章になる。</h3>
+          <p>毎日記録するだけで自動カウント。3日 / 1週間 / 1ヶ月…バッジが増える。30日チャレンジの進捗グリッドで、習慣化を視覚化。</p>
+        </div>
+      </article>
+
+      <article class="nf-card nf-size-third reveal delay-1">
+        <span class="nf-version">v1.1</span>
+        <div class="nf-shot bg-cover"><img src="assets/next-features/12-healthkit.png" alt="HealthKit ヘルスケア連動" loading="lazy"></div>
+        <div class="nf-body">
+          <span class="nf-tag">Apple Watch 連動</span>
+          <h3>歩いた分だけ、食べられる。</h3>
+          <p>ヘルスケアと連携して、歩数・アクティブカロリー・体重を自動取り込み。動いた分が、その日の摂取目標に上乗せされる。</p>
+        </div>
+      </article>
+
+      <article class="nf-card nf-size-third reveal delay-2">
+        <span class="nf-version">v1.1</span>
+        <div class="nf-shot bg-cover"><img src="assets/next-features/17-home-with-meals.png" alt="消費カロリー連動の摂取目標" loading="lazy"></div>
+        <div class="nf-body">
+          <span class="nf-tag tag-soft">バーコード / 消費連動</span>
+          <h3>「基本 2,032 + 運動 540 kcal」</h3>
+          <p>運動した分だけ食べられる kcal が増える。さらにバーコードスキャンでコンビニ商品を一発登録。記録のハードルを、限界まで下げる。</p>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>
