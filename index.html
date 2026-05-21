@@ -373,6 +373,18 @@
   .sparkles span{position:absolute;width:4px;height:4px;background:radial-gradient(circle,rgba(255,255,255,.95),rgba(255,255,255,0));border-radius:50%;animation:sparkle 5s ease-in-out infinite;filter:blur(.3px);}
   @keyframes sparkle{0%,100%{opacity:0;transform:scale(.2);}50%{opacity:1;transform:scale(1.4);}}
 
+  /* 14. Lamp effect（h2 上方の光円錐） */
+  .lamp{position:relative;}
+  .lamp::before{content:"";position:absolute;top:-110px;left:50%;transform:translateX(-50%);width:580px;height:160px;background:conic-gradient(from 180deg at 50% 0%,transparent 0deg,rgba(255,107,53,.32) 28deg,rgba(124,92,255,.42) 60deg,rgba(34,211,238,.30) 92deg,transparent 120deg);filter:blur(28px);opacity:.85;pointer-events:none;animation:lamp-pulse 5s ease-in-out infinite;z-index:0;}
+  .lamp > *{position:relative;z-index:1;}
+  @keyframes lamp-pulse{0%,100%{opacity:.6;}50%{opacity:1;}}
+  @media (max-width:600px){ .lamp::before{width:320px;height:120px;top:-80px;} }
+
+  /* 15. Particle background（流れる粒子） */
+  .particles{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:2;}
+  .particles span{position:absolute;background:radial-gradient(circle,rgba(255,255,255,.85),transparent);border-radius:50%;animation:particle-float linear infinite;will-change:transform,opacity;}
+  @keyframes particle-float{0%{transform:translateY(40px) translateX(0);opacity:0;}10%{opacity:1;}90%{opacity:1;}100%{transform:translateY(-360px) translateX(30px);opacity:0;}}
+
   /* 13. Animated Beam（写真 → AI → PFC） */
   .beam-flow{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:32px auto 0;max-width:760px;}
   .beam-node{flex-shrink:0;width:72px;height:72px;border-radius:18px;display:inline-flex;align-items:center;justify-content:center;background:#fff;color:var(--accent);box-shadow:0 6px 24px rgba(255,107,53,.18);border:1px solid var(--line);position:relative;z-index:1;}
@@ -412,6 +424,7 @@
 
 <header class="hero" id="hero-spotlight">
   <div class="spotlight" aria-hidden="true"></div>
+  <div class="particles" id="hero-particles" aria-hidden="true"></div>
   <div class="sparkles" aria-hidden="true">
     <span style="top:18%;left:12%;animation-delay:0s;"></span>
     <span style="top:32%;left:78%;animation-delay:.8s;width:5px;height:5px;"></span>
@@ -729,7 +742,7 @@
   </div>
 </section>
 
-<section id="pro" class="alt">
+<section id="pro" class="alt lamp">
   <div class="wrap">
     <div class="border-beam reveal"><div class="pro-card">
       <div class="kicker">FitForce Pro</div>
@@ -953,6 +966,24 @@
       var sp = hero.querySelector('.spotlight');
       if (sp){ sp.style.setProperty('--mx', x + '%'); sp.style.setProperty('--my', y + '%'); }
     }, { passive: true });
+  })();
+
+  // 15. Particle background（粒子を動的生成）
+  (function(){
+    var host = document.getElementById('hero-particles');
+    if (!host) return;
+    var count = window.matchMedia && window.matchMedia('(max-width:600px)').matches ? 18 : 32;
+    for (var i = 0; i < count; i++){
+      var p = document.createElement('span');
+      var size = (1.5 + Math.random() * 3).toFixed(1);
+      p.style.left = (Math.random() * 100).toFixed(2) + '%';
+      p.style.top = (60 + Math.random() * 50).toFixed(2) + '%';
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.animationDelay = (Math.random() * 8).toFixed(2) + 's';
+      p.style.animationDuration = (6 + Math.random() * 6).toFixed(1) + 's';
+      host.appendChild(p);
+    }
   })();
 
   // 8. Word Rotation
