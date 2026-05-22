@@ -22,8 +22,32 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;800&display=swap" rel="stylesheet" />
 <script>
-  // Disable browser scroll restoration as early as possible
-  if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+  // Disable browser scroll restoration as early as possible.
+  (function(){
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    if (location.hash) return;
+
+    function resetScroll(){
+      var root = document.scrollingElement || document.documentElement;
+      if (root) root.scrollTop = 0;
+      if (document.body) document.body.scrollTop = 0;
+      window.scrollTo(0, 0);
+    }
+
+    window.__fitforceResetScroll = resetScroll;
+    resetScroll();
+    window.addEventListener('pageshow', function(){ resetScroll(); });
+    window.addEventListener('DOMContentLoaded', function(){
+      resetScroll();
+      requestAnimationFrame(resetScroll);
+    });
+    window.addEventListener('load', function(){
+      resetScroll();
+      requestAnimationFrame(resetScroll);
+      setTimeout(resetScroll, 80);
+      setTimeout(resetScroll, 300);
+    });
+  })();
 </script>
 <style>
   :root{
@@ -117,6 +141,8 @@
   .sub .grad{background:linear-gradient(120deg,#5ac8fa 0%,#0a84ff 45%,#7c5cff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700;}
   .m-only,.m-only2{display:none;}
   @media (max-width:480px){ .m-only,.m-only2{display:inline;} }
+  .feature-title-mobile-break{display:none;}
+  @media (max-width:600px){ .feature-title-mobile-break{display:inline;} }
   .sub{margin:24px 0 0;max-width:560px;font-size:clamp(16px,1.4vw,19px);font-weight:400;color:rgba(255,255,255,.78);line-height:1.55;}
   .hero .cta-row{justify-content:flex-start;}
   .hero .btn-ghost{color:#5ac8fa;}
@@ -485,8 +511,9 @@
   nav .links a:hover{background:rgba(255,255,255,.09);color:#fff;}
 
   .hero{min-height:auto;padding:64px 0 54px;background:radial-gradient(ellipse at 80% 18%,rgba(35,213,255,.18),transparent 34%),linear-gradient(135deg,#020307 0%,#080a13 48%,#120812 100%);}
-  .hero-bg{opacity:.94;}
-  .hero-bg::after{background:linear-gradient(90deg,#030408 0%,rgba(3,4,8,.92) 30%,rgba(3,4,8,.56) 58%,rgba(3,4,8,.10) 78%),linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.72));}
+  .hero-bg{opacity:1;}
+  .hero-bg video,.hero-bg img.fallback{filter:brightness(1.34) saturate(1.08) contrast(1.02);}
+  .hero-bg::after{background:linear-gradient(90deg,rgba(3,4,8,.74) 0%,rgba(3,4,8,.48) 32%,rgba(3,4,8,.16) 56%,rgba(3,4,8,0) 76%),linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.16));}
   .hero::before{display:none;}
   .hero .wrap{display:grid;grid-template-columns:minmax(0,720px) minmax(280px,420px);align-items:end;gap:48px;min-height:calc(100svh - 252px);}
   .hero-text{max-width:720px;}
@@ -574,6 +601,7 @@
     .hero{padding:0 0 56px;min-height:0;}
     .hero .wrap{display:block;min-height:0;}
     .hero-bg{height:58vw;}
+    .hero-bg::after{background:linear-gradient(180deg,rgba(3,4,8,0) 0%,rgba(3,4,8,0) 46%,rgba(3,4,8,.34) 78%,#05060b 100%);}
     .hero-text{padding-top:calc(52vw);}
     .hero .icon{display:none;}
     .h1{font-size:32px;line-height:1.12;}
@@ -827,7 +855,7 @@
 <section id="features">
   <div class="wrap">
     <div class="kicker reveal">Main Features</div>
-    <h2 class="h2 reveal delay-1">毎日のフィットネスを、<br/>もっとシンプルに。</h2>
+    <h2 class="h2 reveal delay-1">毎日の<span class="feature-title-mobile-break"><br/></span>フィットネスを、<br/>もっとシンプルに。</h2>
     <p class="lede reveal delay-2">食事を写真で記録するだけ。筋トレメニューはAIが今日の目的に合わせて設計。あなたは行動に集中するだけです。</p>
 
     <div class="features reveal delay-2">
@@ -1130,13 +1158,7 @@
 
 <script>
   (function(){
-    // Force scroll to top on reload (unless URL has a hash anchor)
-    if (!location.hash) {
-      window.scrollTo(0, 0);
-      window.addEventListener('load', function(){
-        if (!location.hash) window.scrollTo(0, 0);
-      });
-    }
+    if (!location.hash && window.__fitforceResetScroll) window.__fitforceResetScroll();
 
     var els = document.querySelectorAll('.reveal');
     if (!('IntersectionObserver' in window)) {
