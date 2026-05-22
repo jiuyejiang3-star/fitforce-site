@@ -142,7 +142,7 @@
   .m-only,.m-only2{display:none;}
   @media (max-width:480px){ .m-only,.m-only2{display:inline;} }
   .feature-title-mobile-break{display:none;}
-  @media (max-width:600px){ .feature-title-mobile-break{display:inline;} }
+  .feature-title-line{white-space:nowrap;}
   .sub{margin:24px 0 0;max-width:560px;font-size:clamp(16px,1.4vw,19px);font-weight:400;color:rgba(255,255,255,.78);line-height:1.55;}
   .hero .cta-row{justify-content:flex-start;}
   .hero .btn-ghost{color:#5ac8fa;}
@@ -512,8 +512,8 @@
 
   .hero{min-height:auto;padding:64px 0 54px;background:radial-gradient(ellipse at 80% 18%,rgba(35,213,255,.18),transparent 34%),linear-gradient(135deg,#020307 0%,#080a13 48%,#120812 100%);}
   .hero-bg{opacity:1;}
-  .hero-bg video,.hero-bg img.fallback{filter:brightness(1.34) saturate(1.08) contrast(1.02);}
-  .hero-bg::after{background:linear-gradient(90deg,rgba(3,4,8,.74) 0%,rgba(3,4,8,.48) 32%,rgba(3,4,8,.16) 56%,rgba(3,4,8,0) 76%),linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.16));}
+  .hero-bg video,.hero-bg img.fallback{filter:brightness(1.72) saturate(1.14) contrast(1.01);}
+  .hero-bg::after{background:linear-gradient(90deg,rgba(3,4,8,.50) 0%,rgba(3,4,8,.30) 30%,rgba(3,4,8,.08) 54%,rgba(3,4,8,0) 74%),linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.08));}
   .hero::before{display:none;}
   .hero .wrap{display:grid;grid-template-columns:minmax(0,720px) minmax(280px,420px);align-items:end;gap:48px;min-height:calc(100svh - 252px);}
   .hero-text{max-width:720px;}
@@ -601,11 +601,11 @@
     .hero{padding:0 0 56px;min-height:0;}
     .hero .wrap{display:block;min-height:0;}
     .hero-bg{height:58vw;}
-    .hero-bg::after{background:linear-gradient(180deg,rgba(3,4,8,0) 0%,rgba(3,4,8,0) 46%,rgba(3,4,8,.34) 78%,#05060b 100%);}
+    .hero-bg::after{background:linear-gradient(180deg,rgba(3,4,8,0) 0%,rgba(3,4,8,0) 52%,rgba(3,4,8,.18) 82%,#05060b 100%);}
     .hero-text{padding-top:calc(52vw);}
     .hero .icon{display:none;}
     .h1{font-size:32px;line-height:1.12;}
-    .h2{font-size:35px;}
+    .h2{font-size:30px;line-height:1.18;text-wrap:auto;}
     .sub{font-size:15.5px;}
     .hero-features{display:none;}
     .hf-item{display:grid;grid-template-columns:52px 1fr;column-gap:12px;text-align:left;align-items:center;padding:13px;}
@@ -619,10 +619,14 @@
   @media (max-width:420px){
     .wrap{padding:0 20px;}
     .h1{font-size:35px;}
+    .h2{font-size:29px;}
     .hero-proof{grid-template-columns:1fr;}
     .hero-proof div:last-child{grid-column:auto;}
     .hero .cta-row{align-items:stretch;}
     .hero .btn-ghost,.hero .appstore-badge{width:100%;justify-content:center;}
+  }
+  @media (max-width:360px){
+    .h2{font-size:27px;}
   }
 
 </style>
@@ -855,7 +859,7 @@
 <section id="features">
   <div class="wrap">
     <div class="kicker reveal">Main Features</div>
-    <h2 class="h2 reveal delay-1">毎日の<span class="feature-title-mobile-break"><br/></span>フィットネスを、<br/>もっとシンプルに。</h2>
+    <h2 class="h2 reveal delay-1"><span class="feature-title-line">毎日のフィットネスを、</span><br/>もっとシンプルに。</h2>
     <p class="lede reveal delay-2">食事を写真で記録するだけ。筋トレメニューはAIが今日の目的に合わせて設計。あなたは行動に集中するだけです。</p>
 
     <div class="features reveal delay-2">
@@ -1110,7 +1114,7 @@
     <div class="reveal delay-2" style="margin-top:44px;">
       <details>
         <summary>データはどこに保存されますか？</summary>
-        <p>筋トレ・食事・体重などの記録は端末内に保存されます。AI評価機能を利用した際のみ、評価対象のデータがGoogleの生成AI（Gemini）に送信されます。氏名・メールアドレスなどの個人特定情報は一切送信しません。</p>
+        <p>筋トレ・食事・体重などの記録は端末内に保存されます。AI機能では、ユーザーが選択した食事写真や食事・運動・体重・プロフィール由来の情報がGoogleの生成AI（Gemini）へ送信される場合があります。バーコード検索では、食品情報取得のためバーコード番号がOpen Food Factsへ送信される場合があります。</p>
       </details>
       <details>
         <summary>Proプランの解約はできますか？</summary>
