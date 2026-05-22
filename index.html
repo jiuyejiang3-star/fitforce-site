@@ -449,6 +449,154 @@
     .nf-size-wide{grid-template-columns:1fr;}
     .nf-size-wide .nf-shot{aspect-ratio:9/16;margin-bottom:18px;}
   }
+
+
+  .signal-rail{background:#05060b;border-top:1px solid rgba(255,255,255,.10);border-bottom:1px solid rgba(255,255,255,.10);padding:14px 0;}
+  .signal-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;}
+  .signal-grid a{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:56px;padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.10);color:#fff;transition:transform .25s ease,border-color .25s ease,background .25s ease;}
+  .signal-grid a:hover{transform:translateY(-2px);background:rgba(255,255,255,.085);border-color:rgba(35,213,255,.38);}
+  .signal-grid span{font-size:11px;font-weight:900;color:var(--cyan);text-transform:uppercase;}
+  .signal-grid strong{font-size:14px;font-weight:900;color:rgba(255,255,255,.9);text-align:right;}
+  @media (max-width:760px){
+    .signal-rail{padding:12px 0;overflow:hidden;}
+    .signal-grid{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 20px;scrollbar-width:none;}
+    .signal-grid::-webkit-scrollbar{display:none;}
+    .signal-grid a{flex:0 0 210px;scroll-snap-align:start;}
+  }
+
+  /* === Visual refresh by Codex: sharper first view, richer contrast, safer responsive sizing === */
+  :root{
+    --cyan:#23d5ff;
+    --violet:#8b5cf6;
+    --hot:#ff4d2e;
+    --lime:#b8ff3d;
+    --deep:#05060b;
+  }
+  body{overflow-x:hidden;letter-spacing:0;}
+  .h1,.h2,.kicker,.eyebrow,.btn,.brand,.feature h3,.bento-tile h3,.nf-card h3,.price .yen{letter-spacing:0;}
+  .h1{font-size:56px;line-height:1.05;text-wrap:balance;white-space:normal;max-width:720px;}
+  .h2{font-size:54px;line-height:1.08;text-wrap:balance;}
+  nav{background:linear-gradient(90deg,rgba(5,6,11,.92),rgba(18,18,30,.84));border-bottom:1px solid rgba(255,255,255,.12);}
+  nav .wrap{height:60px;}
+  nav .brand img{width:28px;height:28px;border-radius:8px;box-shadow:0 0 22px rgba(255,77,46,.38);}
+  nav .brand{font-size:15px;font-weight:800;}
+  nav .links{gap:8px;font-weight:700;}
+  nav .links a{padding:8px 12px;border-radius:999px;color:rgba(255,255,255,.72);}
+  nav .links a:hover{background:rgba(255,255,255,.09);color:#fff;}
+
+  .hero{min-height:auto;padding:64px 0 54px;background:radial-gradient(ellipse at 80% 18%,rgba(35,213,255,.18),transparent 34%),linear-gradient(135deg,#020307 0%,#080a13 48%,#120812 100%);}
+  .hero-bg{opacity:.94;}
+  .hero-bg::after{background:linear-gradient(90deg,#030408 0%,rgba(3,4,8,.92) 30%,rgba(3,4,8,.56) 58%,rgba(3,4,8,.10) 78%),linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.72));}
+  .hero::before{display:none;}
+  .hero .wrap{display:grid;grid-template-columns:minmax(0,720px) minmax(280px,420px);align-items:end;gap:48px;min-height:calc(100svh - 252px);}
+  .hero-text{max-width:720px;}
+  .hero .icon{width:72px;height:72px;border-radius:18px;margin-bottom:18px;box-shadow:0 24px 70px rgba(255,77,46,.42),0 0 0 1px rgba(255,255,255,.16);}
+  .eyebrow{color:var(--cyan);font-weight:900;}
+  .h1 .grad,.sub .grad{background:linear-gradient(120deg,#fff 0%,var(--cyan) 28%,#2f7dff 58%,var(--violet) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .sub{max-width:640px;font-size:18px;color:rgba(255,255,255,.84);}
+  .hero .cta-row{margin-top:28px;gap:16px;align-items:center;}
+  .hero .appstore-badge{background:linear-gradient(135deg,#ff3d1f 0%,#ff7a2d 44%,#8b5cf6 100%);box-shadow:0 20px 56px rgba(255,77,46,.32),0 0 0 1px rgba(255,255,255,.18) inset;}
+  .hero .btn-ghost{color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);}
+  .hero .btn-ghost:hover{background:rgba(255,255,255,.13);}
+
+  .hero-features{display:none;max-width:700px;gap:14px;margin-top:26px;}
+  @media (min-width:761px) and (min-height:850px){.hero-features{display:grid;}}
+  .hf-item{padding:16px 12px;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(255,255,255,.055);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);}
+  .hf-ic{width:52px;height:52px;margin-bottom:10px;background:rgba(35,213,255,.08);}
+  .hf-label{color:#fff;font-weight:900;}
+  .hf-desc{color:rgba(255,255,255,.66);}
+  .hero-proof{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:700px;margin-top:24px;}
+  .hero-proof div{padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.12);}
+  .hero-proof strong{display:block;font-size:23px;line-height:1;font-weight:900;color:#fff;}
+  .hero-proof span{display:block;margin-top:6px;font-size:12px;font-weight:700;color:rgba(255,255,255,.62);}
+
+  .hero-command{justify-self:end;width:100%;max-width:390px;padding:24px;border-radius:28px;background:linear-gradient(180deg,rgba(255,255,255,.17),rgba(255,255,255,.07));border:1px solid rgba(255,255,255,.20);box-shadow:0 34px 90px rgba(0,0,0,.42),0 0 0 1px rgba(255,255,255,.06) inset;backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);color:#fff;transform:translateY(-8px);}
+  .command-head{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:900;color:var(--cyan);}
+  .live-dot{width:9px;height:9px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 7px rgba(184,255,61,.12),0 0 18px rgba(184,255,61,.7);}
+  .command-title{margin-top:24px;font-size:14px;font-weight:800;color:rgba(255,255,255,.62);}
+  .command-focus{margin-top:3px;font-size:34px;font-weight:900;line-height:1.08;}
+  .command-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;}
+  .command-grid div{padding:14px;border-radius:18px;background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.10);}
+  .command-label{display:block;font-size:11px;font-weight:800;color:rgba(255,255,255,.55);}
+  .command-grid strong{display:block;margin-top:4px;font-size:25px;line-height:1;font-weight:900;}
+  .command-track{height:10px;margin-top:18px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden;}
+  .command-track span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--hot),var(--cyan),var(--violet));box-shadow:0 0 24px rgba(35,213,255,.38);}
+  .command-list{display:grid;gap:10px;margin-top:18px;}
+  .command-list span{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;padding:11px 12px;border-radius:14px;background:rgba(255,255,255,.08);font-size:13px;font-weight:800;color:rgba(255,255,255,.84);}
+  .command-list b{font:inherit;}
+  .command-list em{font-style:normal;font-size:12px;font-weight:900;color:rgba(255,255,255,.70);white-space:nowrap;}
+
+  .bento-section{background:linear-gradient(180deg,#05060b 0%,#0b0c15 100%);color:#fff;padding:96px 0;}
+  .bento-grid{gap:16px;}
+  .bento-tile{background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.035));border-color:rgba(255,255,255,.12);box-shadow:0 16px 54px rgba(0,0,0,.22);}
+  .bento-tile:hover{border-color:rgba(35,213,255,.42);box-shadow:0 24px 70px rgba(35,213,255,.12);}
+  .bento-tile.large{background:linear-gradient(135deg,rgba(255,77,46,.22),rgba(139,92,246,.22) 42%,rgba(35,213,255,.13));border:1px solid rgba(255,255,255,.16);}
+  .bento-tile h3,.bento-tile .bento-unit{color:#fff;}
+  .bento-tile p,.bento-tile .bento-stat-label{color:rgba(255,255,255,.68);}
+  .bento-tile .bento-icon{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.12);color:var(--cyan);}
+  .bento-tile .bento-stat{background:linear-gradient(120deg,var(--hot),var(--cyan) 58%,var(--violet));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .beam-node{background:rgba(255,255,255,.10);color:#fff;border-color:rgba(255,255,255,.14);box-shadow:0 12px 34px rgba(35,213,255,.16);}
+  .beam-node.alt{color:#fff;box-shadow:0 12px 34px rgba(139,92,246,.18);}
+  .beam-node-label{color:rgba(255,255,255,.72);}
+
+  #features{background:linear-gradient(180deg,#05060b 0%,#090b14 100%);}
+  #features::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:52px 52px;mask-image:linear-gradient(180deg,rgba(0,0,0,.5),transparent 78%);-webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.5),transparent 78%);pointer-events:none;}
+  #features .wrap{position:relative;z-index:1;}
+  .feature{border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.09),rgba(255,255,255,.035));}
+  .feature .ic{border-radius:14px;background:linear-gradient(135deg,rgba(35,213,255,.14),rgba(139,92,246,.12));}
+
+  section.alt{background:linear-gradient(180deg,#f7f8fb 0%,#eef2f6 100%);}
+  .device-frame{box-shadow:0 44px 120px rgba(10,15,30,.18),0 18px 44px rgba(35,213,255,.10);}
+  .pro-card{background:linear-gradient(145deg,#070810 0%,#14152a 48%,#1a0c16 100%);}
+  .price.featured{background:linear-gradient(135deg,rgba(255,77,46,.22),rgba(139,92,246,.22));}
+
+  @media (max-height:760px) and (min-width:761px){
+    .hero-command{padding:20px;max-width:390px;}
+    .command-title{margin-top:18px;}
+    .command-focus{font-size:31px;}
+    .command-grid{margin-top:16px;}
+    .command-track{margin-top:14px;}
+    .command-list{gap:8px;margin-top:14px;}
+    .command-list span{padding:9px 11px;}
+    .command-list em{font-size:11px;}
+    
+    .hero-proof{display:none;}
+  }
+
+  @media (max-width:980px){
+    .h1{font-size:48px;}
+    .h2{font-size:44px;}
+    .hero .wrap{grid-template-columns:1fr;gap:26px;min-height:auto;}
+    .hero-command{justify-self:start;max-width:620px;}
+  }
+  @media (max-width:760px){
+    nav .wrap{height:54px;}
+    .hero{padding:0 0 56px;min-height:0;}
+    .hero .wrap{display:block;min-height:0;}
+    .hero-bg{height:58vw;}
+    .hero-text{padding-top:calc(52vw);}
+    .hero .icon{display:none;}
+    .h1{font-size:32px;line-height:1.12;}
+    .h2{font-size:35px;}
+    .sub{font-size:15.5px;}
+    .hero-features{display:none;}
+    .hf-item{display:grid;grid-template-columns:52px 1fr;column-gap:12px;text-align:left;align-items:center;padding:13px;}
+    .hf-ic{grid-row:span 2;margin:0;}
+    .hero-proof{display:none;}
+    .hero-command{margin-top:22px;max-width:none;padding:18px;border-radius:22px;}
+    .command-focus{font-size:28px;}
+    .command-grid strong{font-size:22px;}
+    .bento-section{padding:70px 0;}
+  }
+  @media (max-width:420px){
+    .wrap{padding:0 20px;}
+    .h1{font-size:35px;}
+    .hero-proof{grid-template-columns:1fr;}
+    .hero-proof div:last-child{grid-column:auto;}
+    .hero .cta-row{align-items:stretch;}
+    .hero .btn-ghost,.hero .appstore-badge{width:100%;justify-content:center;}
+  }
+
 </style>
 </head>
 <body>
@@ -551,10 +699,47 @@
         </a>
         <a class="btn btn-ghost" href="#features">機能を見る</a>
       </div>
+      <div class="hero-proof reveal delay-4" aria-label="FitForceの主要ポイント">
+        <div><strong>30秒</strong><span>写真で食事記録</span></div>
+        <div><strong>115種目</strong><span>部位別ライブラリ</span></div>
+        <div><strong>24h</strong><span>AIレビュー待機</span></div>
+      </div>
     </div>
+    <aside class="hero-command reveal delay-4" aria-label="FitForceのAIコーチ画面イメージ">
+      <div class="command-head">
+        <span class="live-dot"></span>
+        <span>AI COACH ONLINE</span>
+      </div>
+      <div class="command-title">今日のメニュー例</div>
+      <div class="command-focus">Push Day / 55分</div>
+      <div class="command-grid">
+        <div>
+          <span class="command-label">Protein</span>
+          <strong>142g</strong>
+        </div>
+        <div>
+          <span class="command-label">Burn</span>
+          <strong>640kcal</strong>
+        </div>
+      </div>
+      <div class="command-track" aria-hidden="true"><span style="width:76%"></span></div>
+      <div class="command-list">
+        <span><b>ベンチプレス</b><em>60kg × 8回 × 3セット</em></span>
+        <span><b>DBショルダープレス</b><em>16kg × 10回 × 3セット</em></span>
+        <span><b>サイドレイズ</b><em>7kg × 15回 × 3セット</em></span>
+      </div>
+    </aside>
   </div>
 </header>
 
+<div class="signal-rail" aria-label="FitForce feature map">
+  <div class="wrap signal-grid">
+    <a href="#features"><span>AI Coach</span><strong>筋トレ設計</strong></a>
+    <a href="#features"><span>Meal Scan</span><strong>PFC自動記録</strong></a>
+    <a href="#roadmap"><span>Progress</span><strong>成長を可視化</strong></a>
+    <a href="#pro"><span>Pro</span><strong>AIを無制限に</strong></a>
+  </div>
+</div>
 
 <!-- Bento Grid：数字と特徴の俯瞰 -->
 <section class="bento-section">
