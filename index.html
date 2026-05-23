@@ -77,7 +77,7 @@
       var target = hashTarget();
       if (!target) return false;
       var top = target.getBoundingClientRect().top + window.pageYOffset - stickyOffset();
-      window.scrollTo({ left: 0, top: Math.max(0, Math.round(top)), behavior: 'auto' });
+      window.scrollTo(0, Math.max(0, Math.round(top)));
       return true;
     }
 
@@ -97,27 +97,37 @@
     window.__fitforceHasAnchor = requestedAnchor;
 
     if (requestedAnchor()) {
+      var userInteracted = false;
+      function stopAutoAlign(){ userInteracted = true; }
+      function alignIfUntouched(){
+        if (!userInteracted) keepHashAligned();
+      }
+      window.addEventListener('touchstart', stopAutoAlign, { passive: true, once: true });
+      window.addEventListener('pointerdown', stopAutoAlign, { passive: true, once: true });
+      window.addEventListener('wheel', stopAutoAlign, { passive: true, once: true });
+      window.addEventListener('keydown', stopAutoAlign, { once: true });
+
       window.addEventListener('DOMContentLoaded', function(){
-        keepHashAligned();
-        requestAnimationFrame(keepHashAligned);
+        alignIfUntouched();
+        requestAnimationFrame(alignIfUntouched);
       });
       window.addEventListener('load', function(){
-        keepHashAligned();
-        requestAnimationFrame(keepHashAligned);
-        setTimeout(keepHashAligned, 80);
-        setTimeout(keepHashAligned, 300);
-        setTimeout(keepHashAligned, 800);
-        setTimeout(keepHashAligned, 1600);
-        setTimeout(keepHashAligned, 2800);
+        alignIfUntouched();
+        requestAnimationFrame(alignIfUntouched);
+        setTimeout(alignIfUntouched, 80);
+        setTimeout(alignIfUntouched, 300);
+        setTimeout(alignIfUntouched, 800);
+        setTimeout(alignIfUntouched, 1600);
+        setTimeout(alignIfUntouched, 2800);
       });
       window.addEventListener('pageshow', function(){
-        requestAnimationFrame(keepHashAligned);
+        requestAnimationFrame(alignIfUntouched);
       });
       window.addEventListener('hashchange', function(){
-        requestAnimationFrame(keepHashAligned);
+        requestAnimationFrame(alignIfUntouched);
       });
       window.addEventListener('resize', function(){
-        requestAnimationFrame(keepHashAligned);
+        requestAnimationFrame(alignIfUntouched);
       });
       return;
     }
