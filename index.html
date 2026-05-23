@@ -25,6 +25,11 @@
   // Disable browser scroll restoration as early as possible.
   (function(){
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    if (location.hash) {
+      try {
+        history.replaceState(null, document.title, location.pathname + location.search);
+      } catch (e) {}
+    }
 
     function stickyOffset(){
       var nav = document.querySelector('nav');
@@ -61,9 +66,6 @@
       if (/roadmap/i.test(values)) return 'roadmap';
       if (/\bpro\b/i.test(values)) return 'pro';
       if (/\bfaq\b/i.test(values)) return 'faq';
-
-      // Instagram sometimes drops the fragment but keeps fbclid/query params.
-      if (!location.hash && search.has('fbclid') && search.get('v') === '2') return 'features';
       return '';
     }
 
