@@ -32,12 +32,44 @@
       return Math.ceil(navHeight + 12);
     }
 
+    function decodeLoose(value){
+      var text = String(value || '');
+      for (var i = 0; i < 3; i++) {
+        try {
+          var decoded = decodeURIComponent(text);
+          if (decoded === text) break;
+          text = decoded;
+        } catch (e) {
+          break;
+        }
+      }
+      return text;
+    }
+
+    function requestedAnchor(){
+      var hashText = decodeLoose(location.hash.replace(/^#/, ''));
+      var search = new URLSearchParams(location.search);
+      var values = [
+        hashText,
+        decodeLoose(search.get('anchor')),
+        decodeLoose(search.get('section')),
+        decodeLoose(search.get('jump')),
+        decodeLoose(search.get('to'))
+      ].join(' ');
+
+      if (/features/i.test(values)) return 'features';
+      if (/roadmap/i.test(values)) return 'roadmap';
+      if (/\bpro\b/i.test(values)) return 'pro';
+      if (/\bfaq\b/i.test(values)) return 'faq';
+
+      // Instagram sometimes drops the fragment but keeps fbclid/query params.
+      if (!location.hash && search.has('fbclid') && search.get('v') === '2') return 'features';
+      return '';
+    }
+
     function hashTarget(){
-      if (!location.hash || location.hash.length < 2) return null;
-      var raw = location.hash.slice(1);
-      var id = raw;
-      try { id = decodeURIComponent(raw); } catch (e) {}
-      id = id.replace(/^[\s\u3000]+|[\s\u3000]+$/g, '').split(/[\s\u3000?&]+/)[0];
+      var id = requestedAnchor();
+      if (!id) return null;
       return document.getElementById(id) || document.getElementsByName(id)[0] || null;
     }
 
@@ -50,7 +82,6 @@
     }
 
     function keepHashAligned(){
-      if (!location.hash) return;
       if (!scrollToHash() && window.__fitforceResetScroll) window.__fitforceResetScroll();
     }
 
@@ -63,8 +94,9 @@
 
     window.__fitforceResetScroll = resetScroll;
     window.__fitforceScrollToHash = scrollToHash;
+    window.__fitforceHasAnchor = requestedAnchor;
 
-    if (location.hash) {
+    if (requestedAnchor()) {
       window.addEventListener('DOMContentLoaded', function(){
         keepHashAligned();
         requestAnimationFrame(keepHashAligned);
@@ -1219,7 +1251,7 @@
 
 <script>
   (function(){
-    if (location.hash && window.__fitforceScrollToHash) {
+    if (window.__fitforceHasAnchor && window.__fitforceHasAnchor() && window.__fitforceScrollToHash) {
       requestAnimationFrame(window.__fitforceScrollToHash);
     } else if (window.__fitforceResetScroll) {
       window.__fitforceResetScroll();
