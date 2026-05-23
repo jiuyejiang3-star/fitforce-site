@@ -37,6 +37,7 @@
       var raw = location.hash.slice(1);
       var id = raw;
       try { id = decodeURIComponent(raw); } catch (e) {}
+      id = id.replace(/^[\s\u3000]+|[\s\u3000]+$/g, '').split(/[\s\u3000?&]+/)[0];
       return document.getElementById(id) || document.getElementsByName(id)[0] || null;
     }
 
@@ -44,8 +45,13 @@
       var target = hashTarget();
       if (!target) return false;
       var top = target.getBoundingClientRect().top + window.pageYOffset - stickyOffset();
-      window.scrollTo(0, Math.max(0, Math.round(top)));
+      window.scrollTo({ left: 0, top: Math.max(0, Math.round(top)), behavior: 'auto' });
       return true;
+    }
+
+    function keepHashAligned(){
+      if (!location.hash) return;
+      if (!scrollToHash() && window.__fitforceResetScroll) window.__fitforceResetScroll();
     }
 
     function resetScroll(){
@@ -60,21 +66,26 @@
 
     if (location.hash) {
       window.addEventListener('DOMContentLoaded', function(){
-        scrollToHash();
-        requestAnimationFrame(scrollToHash);
+        keepHashAligned();
+        requestAnimationFrame(keepHashAligned);
       });
       window.addEventListener('load', function(){
-        scrollToHash();
-        requestAnimationFrame(scrollToHash);
-        setTimeout(scrollToHash, 80);
-        setTimeout(scrollToHash, 300);
-        setTimeout(scrollToHash, 800);
+        keepHashAligned();
+        requestAnimationFrame(keepHashAligned);
+        setTimeout(keepHashAligned, 80);
+        setTimeout(keepHashAligned, 300);
+        setTimeout(keepHashAligned, 800);
+        setTimeout(keepHashAligned, 1600);
+        setTimeout(keepHashAligned, 2800);
       });
       window.addEventListener('pageshow', function(){
-        requestAnimationFrame(scrollToHash);
+        requestAnimationFrame(keepHashAligned);
       });
       window.addEventListener('hashchange', function(){
-        requestAnimationFrame(scrollToHash);
+        requestAnimationFrame(keepHashAligned);
+      });
+      window.addEventListener('resize', function(){
+        requestAnimationFrame(keepHashAligned);
       });
       return;
     }
