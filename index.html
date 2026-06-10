@@ -837,6 +837,57 @@
     .kicker::before,.kicker::after{transform:none;}
   }
 
+
+  /* ===== FABLE polish v2: ゴーストタイポ／マーキー／進捗バー／グロー ===== */
+  section[data-bg]{overflow:hidden;}
+  section[data-bg] .wrap{position:relative;z-index:1;}
+  section[data-bg]::before{
+    content:attr(data-bg);position:absolute;top:18px;right:-12px;
+    font-family:'Chakra Petch','Noto Sans JP',sans-serif;font-style:italic;font-weight:700;
+    font-size:clamp(96px,13vw,190px);line-height:.9;letter-spacing:.01em;white-space:nowrap;
+    color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.075);
+    pointer-events:none;user-select:none;z-index:0;
+  }
+  section[data-bg]:not(.alt)::before{right:auto;left:-12px;}
+  @media (max-width:760px){
+    section[data-bg]::before{font-size:74px;top:10px;-webkit-text-stroke-width:1px;}
+  }
+
+  /* マーキーバンド（ダーク仕様） */
+  .marquee{padding:16px 0;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg,rgba(35,213,255,.05),transparent);}
+  .marquee-item{font-family:var(--hud);font-style:italic;font-weight:700;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:rgba(228,233,245,.6);}
+  .marquee-item::before{background:linear-gradient(135deg,var(--hot),var(--cyan));box-shadow:0 0 12px rgba(255,77,46,.55);}
+
+  /* スクロール進捗バー（対応ブラウザのみ） */
+  @supports (animation-timeline: scroll()) {
+    body::before{
+      content:"";position:fixed;top:0;left:0;right:0;height:3px;z-index:3000;pointer-events:none;
+      background:linear-gradient(90deg,var(--hot),var(--cyan) 55%,var(--violet));
+      transform-origin:0 50%;transform:scaleX(0);
+      animation:ff-progress linear both;animation-timeline:scroll(root);
+    }
+  }
+  @keyframes ff-progress{to{transform:scaleX(1);}}
+
+  /* DLボタンの呼吸グロー */
+  @keyframes cta-breathe{
+    0%,100%{box-shadow:0 16px 44px rgba(255,77,46,.30),inset 0 0 0 1px rgba(255,255,255,.18);}
+    50%{box-shadow:0 18px 64px rgba(255,77,46,.55),inset 0 0 0 1px rgba(255,255,255,.28);}
+  }
+  .hero .appstore-badge,.sticky-cta .appstore-badge{animation:cta-breathe 3.2s ease-in-out infinite;}
+
+  /* ショーケース端末のフロート */
+  @keyframes dev-float{0%,100%{translate:0 0;}50%{translate:0 -12px;}}
+  .showcase .device{animation:dev-float 7s ease-in-out infinite;}
+  .showcase .device:nth-child(2){animation-delay:-1.8s;animation-duration:6s;}
+  .showcase .device:nth-child(3){animation-delay:-3.4s;}
+  .showcase .device:nth-child(4){animation-delay:-5s;animation-duration:8s;}
+
+  @media (prefers-reduced-motion:reduce){
+    .hero .appstore-badge,.sticky-cta .appstore-badge,.showcase .device,.marquee-track{animation:none;}
+    body::before{display:none;}
+  }
+
 </style>
 </head>
 <body>
@@ -891,7 +942,7 @@
       <img class="icon reveal" src="assets/app-icon.png" alt="FitForce App Icon" />
       <div class="eyebrow reveal delay-1">AI × FITNESS</div>
       <h1 class="h1 reveal delay-1">AIが、<span class="grad word-rotate" id="word-rotate">最強の自分</span>を<br/>設計する。<br/><span class="grad">あなた専属</span>で。</h1>
-      <p class="sub reveal delay-2">食事のPFC管理と筋トレ記録を、<br class="m-only"/><span class="grad">AIコーチが毎日サポート</span>。<br/>やさしめから鬼軍曹まで選べる6人格で、<br class="m-only"/>写真解析、減量コーチ、ボディフォト比較まで<br/><span class="grad">iPhoneひとつ</span>で。</p>
+      <p class="sub reveal delay-2">カロリー計算も、今日のメニュー決めも、<br class="m-only"/><span class="grad">もう考えなくていい</span>。<br/>写真を撮るだけ、選ぶだけ。<br class="m-only"/>やさしい栄養士から鬼軍曹まで、6人格のAIコーチが<br/>挫折しがちなあなたに<span class="grad">毎日つきっきり</span>。</p>
       <div class="hero-features reveal delay-3">
         <div class="hf-item">
           <div class="hf-ic">
@@ -933,16 +984,16 @@
             <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
           </svg>
           <div class="badge-text">
-            <span class="badge-top">App Storeから</span>
-            <span class="badge-bot">ダウンロード</span>
+            <span class="badge-top">App Store・ダウンロード無料</span>
+            <span class="badge-bot">無料で始める</span>
           </div>
         </a>
         <a class="btn btn-ghost" href="#features">機能を見る</a>
       </div>
       <div class="hero-proof reveal delay-4" aria-label="FitForceの主要ポイント">
-        <div><strong>30秒</strong><span>写真で食事記録</span></div>
-        <div><strong>115種目</strong><span>部位別ライブラリ</span></div>
-        <div><strong>6人格</strong><span>選んで継続</span></div>
+        <div><strong>30秒</strong><span>食事記録は写真だけ</span></div>
+        <div><strong>115種目</strong><span>AIがメニュー設計</span></div>
+        <div><strong>6人格</strong><span>飽きずに続く</span></div>
       </div>
     </div>
     <aside class="hero-command reveal delay-4" aria-label="FitForceのAIコーチ画面イメージ">
@@ -981,6 +1032,8 @@
   </div>
 </div>
 
+<div class="marquee" aria-hidden="true"><div class="marquee-track"><span class="marquee-item">NO MORE EXCUSES</span><span class="marquee-item">写真1枚、30秒で記録</span><span class="marquee-item">TRAIN SMART</span><span class="marquee-item">AIが今日のメニューを設計</span><span class="marquee-item">EAT CLEAN</span><span class="marquee-item">筋肉を守って減量</span><span class="marquee-item">6 AI COACHES</span><span class="marquee-item">挫折は仕組みで防ぐ</span><span class="marquee-item">NO MORE EXCUSES</span><span class="marquee-item">写真1枚、30秒で記録</span><span class="marquee-item">TRAIN SMART</span><span class="marquee-item">AIが今日のメニューを設計</span><span class="marquee-item">EAT CLEAN</span><span class="marquee-item">筋肉を守って減量</span><span class="marquee-item">6 AI COACHES</span><span class="marquee-item">挫折は仕組みで防ぐ</span></div></div>
+
 <!-- Bento Grid：数字と特徴の俯瞰 -->
 <section class="bento-section">
   <div class="wrap">
@@ -989,8 +1042,8 @@
         <div class="bento-blob tr"></div>
         <div class="bento-blob bl"></div>
         <span class="bento-eyebrow">AI × FITNESS</span>
-        <h3>あなた専属の<br class="m-only"/>AIコーチが、<br/>食事も筋トレも<br class="m-only"/>毎日管理。</h3>
-        <p>食事・筋トレ・体重記録から今日の改善点を提案。やさしい栄養士・鬼軍曹・関西のおかん・データ分析官に加え、Pro限定の博多弁の彼女・彼氏まで、計6人格から続けやすいコーチを選べます。</p>
+        <h3>専属トレーナーは、<br class="m-only"/>もう<br/>雇わなくていい。</h3>
+        <p>食事・筋トレ・体重から、AIが毎日「今日の改善点」を提案。やさしい栄養士・鬼軍曹・関西のおかん・データ分析官、Pro限定の博多弁の彼女・彼氏まで、あなたが続けられる相棒が必ず見つかります。深夜でも文句を言いません。</p>
       </div>
       <div class="bento-tile">
         <div class="bento-icon">
@@ -1004,7 +1057,7 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3Z"/><circle cx="12" cy="13" r="3"/></svg>
         </div>
         <div class="bento-stat-line"><span class="bento-stat counter" data-target="30">0</span><span class="bento-unit">秒</span></div>
-        <div class="bento-stat-label">で食事を記録</div>
+        <div class="bento-stat-label">で食事記録が終わる</div>
       </div>
       <div class="bento-tile">
         <div class="bento-icon">
@@ -1089,8 +1142,8 @@
 <section id="features">
   <div class="wrap">
     <div class="kicker reveal">Main Features</div>
-    <h2 class="h2 reveal delay-1"><span class="feature-title-line">毎日のフィットネスを、</span><br/>もっとシンプルに。</h2>
-    <p class="lede reveal delay-2">食事を写真で記録し、筋トレを残すだけ。FitForceが今日のPFC、減量ペース、回復状態、代替種目までまとめてサポートします。</p>
+    <h2 class="h2 reveal delay-1"><span class="feature-title-line">続かないのは、</span><br/>意志のせいじゃない。</h2>
+    <p class="lede reveal delay-2">仕組みがなかっただけ。写真を撮る、タップする——それだけで、今日のPFCも減量ペースも回復状態も代替種目も、ぜんぶAIが面倒を見ます。</p>
 
     <div class="features reveal delay-2">
       <div class="feature">
@@ -1167,25 +1220,25 @@
   </div>
 </section>
 
-<section class="alt">
+<section class="alt" data-bg="WORKOUT">
   <div class="wrap">
     <div class="duo">
       <div class="reveal">
         <div class="kicker">AI WORKOUT</div>
-        <h2 class="h2">指定した部位で、<br/>自動でメニュー生成。</h2>
-        <p class="lede">分割法・部位・経験レベル・利用環境・時間を選ぶだけ。AIが本日のメニューを設計し、各種目に怪我予防のワンポイントまで提示します。</p>
+        <h2 class="h2">ジムに着いた瞬間、<br/>もう迷わない。</h2>
+        <p class="lede">分割法・部位・経験レベル・利用環境・時間を選ぶだけ。AIが本日のメニューを組み、各種目に怪我予防のワンポイントまで添えます。「今日なにやろう」と考える時間を、挙げる時間に。</p>
       </div>
       <div class="shot reveal delay-1"><div class="device-frame"><img src="assets/shot-menu.png" alt="部位指定でAI自動生成" /></div></div>
     </div>
   </div>
 </section>
 
-<section>
+<section data-bg="LIBRARY">
   <div class="wrap">
     <div class="duo reverse">
       <div class="reveal">
         <div class="kicker">MANUAL PICK</div>
-        <h2 class="h2">気分に合わせて、<br/>手動でも選べる。</h2>
+        <h2 class="h2">こだわりたい日は、<br/>自分流で組める。</h2>
         <p class="lede">AI任せだけじゃない。胸・背中・肩・脚など <strong>12 部位 × 計 115 種目</strong> の種目ライブラリから好きな種目を選んで、自分で組み立てるのも自由自在。部位フィルターで絞り込み、お気に入り種目はブックマークでワンタップ呼び出し。</p>
       </div>
       <div class="shot reveal delay-1"><div class="device-frame"><img src="assets/shot-exercise-picker.png" alt="手動で種目を選ぶ" /></div></div>
@@ -1193,25 +1246,25 @@
   </div>
 </section>
 
-<section class="alt">
+<section class="alt" data-bg="MEAL SCAN">
   <div class="wrap">
     <div class="duo">
       <div class="reveal">
         <div class="kicker">AI MEAL</div>
         <h2 class="h2">食事は、<br/>写真を撮るだけ。</h2>
-        <p class="lede">朝・昼・夕・間食ごとに写真を撮るだけで、AIが食材を認識しカロリー・タンパク質・脂質・炭水化物を自動算出。1日の目標kcalと進捗もリアルタイムで見える化します。</p>
+        <p class="lede">朝・昼・夕・間食ごとに写真を撮るだけで、AIが食材を認識しカロリー・タンパク質・脂質・炭水化物を自動算出。1日の目標kcalと進捗もリアルタイムで見える化。面倒な計算で挫折してきた人にこそ使ってほしい機能です。</p>
       </div>
       <div class="shot reveal delay-1"><div class="device-frame"><img src="assets/shot-meal-mid.png" alt="朝・昼・夕・間食ごとに写真で記録" /></div></div>
     </div>
   </div>
 </section>
 
-<section>
+<section data-bg="ONE TAP">
   <div class="wrap">
     <div class="duo">
       <div class="reveal">
         <div class="kicker">MEAL TEMPLATES</div>
-        <h2 class="h2">定番メニューは、<br/>ワンタップで。</h2>
+        <h2 class="h2">いつもの食事は、<br/>1タップで記録完了。</h2>
         <p class="lede">プリセット＋カスタムテンプレートで、毎日の食事記録を一瞬で。PFC値まで自動で表示されます。</p>
       </div>
       <div class="shot reveal delay-1"><div class="device-frame"><img src="assets/shot-template.png" alt="食事テンプレ" /></div></div>
@@ -1219,12 +1272,12 @@
   </div>
 </section>
 
-<section class="alt">
+<section class="alt" data-bg="RESCUE">
   <div class="wrap">
     <div class="duo reverse">
       <div class="reveal">
         <div class="kicker">RESCUE MODE</div>
-        <h2 class="h2">飲み会があっても、<br/>翌日から戻せる。</h2>
+        <h2 class="h2">飲み会の罪悪感は、<br/>仕組みで消せる。</h2>
         <p class="lede">飲み会、外食、ラーメン、旅行、会食の日はレスキューモードへ。朝昼を軽めにし、タンパク質を優先するPFCへ自動調整。翌日は週カロリー銀行で通常運転へ戻します。</p>
       </div>
       <div class="shot reveal delay-1"><div class="device-frame"><img src="assets/next-features/lp-rescue.png" alt="飲み会・外食レスキューモード" /></div></div>
@@ -1232,25 +1285,25 @@
   </div>
 </section>
 
-<section>
+<section data-bg="CUT SMART">
   <div class="wrap">
     <div class="duo">
       <div class="reveal">
         <div class="kicker">MUSCLE CUT COACH</div>
-        <h2 class="h2">体重だけじゃなく、<br/>筋力を見て減量を調整。</h2>
-        <p class="lede">7日平均体重、主要種目の推定1RM、タンパク質達成率を見て、減量・増量・メンテのフェーズを自動判定。落とすペースが速い時は、カロリーやタンパク質を戻す目安を今日の目標に反映します。</p>
+        <h2 class="h2">「痩せたら貧相」を、<br/>ちゃんと防ぐ。</h2>
+        <p class="lede">せっかく育てた筋肉ごと落とす減量は、もう卒業。7日平均体重・主要種目の推定1RM・タンパク質達成率からフェーズを自動判定し、落とすペースが速い時はカロリーを戻す目安まで今日の目標に反映します。</p>
       </div>
       <div class="shot reveal delay-1"><div class="device-frame"><img src="assets/next-features/lp-cut.png" alt="筋肉を守る減量コーチ" /></div></div>
     </div>
   </div>
 </section>
 
-<section class="alt">
+<section class="alt" data-bg="PATTERN">
   <div class="wrap">
     <div class="duo reverse">
       <div class="reveal">
         <div class="kicker">PATTERN ANALYSIS</div>
-        <h2 class="h2">食べすぎた理由を、<br/>次の対策に変える。</h2>
+        <h2 class="h2">挫折の原因さえ、<br/>データという武器になる。</h2>
         <p class="lede">飲み会、疲れ、ストレス、生理前、夜遅い日をワンタップ記録。月間TOP3と22時以降の崩れパターンを表示し、次に同じ状況が来る前に対策を出します。</p>
       </div>
       <div class="shot reveal delay-1"><div class="device-frame"><img src="assets/next-features/lp-patterns.png" alt="言い訳ログとパターン分析" /></div></div>
@@ -1258,7 +1311,7 @@
   </div>
 </section>
 
-<section>
+<section data-bg="SUPPS">
   <div class="wrap">
     <div class="duo">
       <div class="reveal">
@@ -1271,12 +1324,12 @@
   </div>
 </section>
 
-<section class="alt">
+<section class="alt" data-bg="PROGRESS">
   <div class="wrap">
     <div class="duo reverse">
       <div class="reveal">
         <div class="kicker">BODY PHOTO</div>
-        <h2 class="h2">体重が同じでも、<br/>見た目の変化を残す。</h2>
+        <h2 class="h2">体重計が止まっても、<br/>体は変わっている。</h2>
         <p class="lede">月1のボディフォトを端末内に保存。グリッド付きの比較スライダーで、過去写真と最新写真を重ねて確認できます。写真はサーバーへ送信しません。</p>
       </div>
       <div class="shot reveal delay-1"><div class="device-frame"><img src="assets/next-features/21-body-photo-compare.png" alt="ボディフォト比較スライダー" /></div></div>
@@ -1284,20 +1337,20 @@
   </div>
 </section>
 
-<section class="alt">
+<section class="alt" data-bg="STREAK">
   <div class="wrap">
     <div class="duo reverse">
       <div class="reveal">
         <div class="kicker">HISTORY</div>
-        <h2 class="h2">カレンダーひとつで、<br/>食事も筋トレも記録。</h2>
-        <p class="lede">日付ごとに筋トレ・食事の履歴を一覧表示。部位フィルター、月別の総挙上量・実施日数も自動集計。継続のモチベーションが、ひと目で見える。</p>
+        <h2 class="h2">積み上げが見えると、<br/>人はやめられない。</h2>
+        <p class="lede">日付ごとに筋トレ・食事の履歴を一覧表示。部位フィルター、月別の総挙上量・実施日数も自動集計。埋まっていくカレンダーが、明日もやる理由になる。</p>
       </div>
       <div class="shot reveal delay-1"><div class="device-frame"><img src="assets/shot-history.png" alt="カレンダーで食事・筋トレ履歴管理" /></div></div>
     </div>
   </div>
 </section>
 
-<section>
+<section data-bg="TARGET">
   <div class="wrap">
     <div class="duo">
       <div class="reveal">
@@ -1310,7 +1363,7 @@
   </div>
 </section>
 
-<section>
+<section data-bg="SCIENCE">
   <div class="wrap">
     <div class="duo">
       <div class="reveal">
@@ -1326,7 +1379,7 @@
 <section id="roadmap">
   <div class="wrap">
     <div class="kicker reveal" style="color:var(--accent-2);">AVAILABLE NOW</div>
-    <h2 class="h2 reveal delay-1">記録を続けるための機能も、<br/>すでに搭載。</h2>
+    <h2 class="h2 reveal delay-1">三日坊主への対策が、<br/>これでもかと入ってる。</h2>
     <p class="lede reveal delay-2">AIレビュー、栄養補完、飲み会レスキュー、HealthKit連携、代替種目、フェーズ自動切替、言い訳ログ分析、サプリ通知、ボディフォト比較まで。<br>日々の入力と振り返りを、まとめてサポートします。</p>
 
     <div class="nf-timeline reveal delay-3">
@@ -1486,8 +1539,8 @@
         </div>
       </div>
       <div class="kicker">FitForce Pro</div>
-      <h2 class="h2">AIを、思いきり使える。</h2>
-      <p class="lede">毎日のレビューと週次レビュー、マイルーティン、マイテンプレ、Pro限定のAIコーチ人格。3日間無料トライアルから始められます。</p>
+      <h2 class="h2">専属コーチが、<br/>1日あたり約13円。</h2>
+      <p class="lede">パーソナルジムなら月に数万円。FitForce Proは月額¥580、年額プランなら1日あたり約13円で、毎日のAIレビューから週次レビュー、マイルーティン、Pro限定人格まで全部入り。初回対象者は3日間、無料で試せます。</p>
       <ul class="pro-list">
         <li>AI機能（食事写真解析・AIメニュー生成・AI 1日レビュー・AI筋トレ評価）を1日40回まで利用可能</li>
         <li>週次AIレビュー</li>
@@ -1523,6 +1576,10 @@
         <p>筋トレ・食事・体重などの記録は端末内に保存されます。AI機能では、ユーザーが選択した食事写真や食事・運動・体重・プロフィール由来の情報がGoogleの生成AI（Gemini）へ送信される場合があります。バーコード検索では、食品情報取得のためバーコード番号がOpen Food Factsへ送信される場合があります。</p>
       </details>
       <details>
+        <summary>無料のままでも使えますか？</summary>
+        <p>使えます。筋トレ・食事・体重の記録、カレンダー、体重トラッキングなどの基本機能と、基本のAIコーチ人格4種は無料プランで利用できます。AI機能をたくさん使いたい方、Pro限定人格を使いたい方にProをおすすめしています。</p>
+      </details>
+      <details>
         <summary>Proプランの解約はできますか？</summary>
         <p>Apple IDのサブスクリプション管理画面からいつでも解約できます。期間内であれば残りの期間はProとしてご利用いただけます。</p>
       </details>
@@ -1545,16 +1602,16 @@
 <div class="sticky-cta" id="sticky-cta" aria-hidden="true">
   <div class="wrap">
     <div class="sticky-cta-text">
-      <strong>FitForce</strong>
-      <span>AIが、最強の自分を設計する。</span>
+      <strong>FitForce — ダウンロード無料</strong>
+      <span>専属AIコーチと、今日から始める。</span>
     </div>
     <a class="appstore-badge magnetic" href="https://apps.apple.com/us/app/fitforce-ai%E9%A3%9F%E4%BA%8B-%E7%AD%8B%E3%83%88%E3%83%AC%E7%AE%A1%E7%90%86/id6770904257" target="_blank" rel="noopener" aria-label="App Store からFitForceをダウンロード">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
       </svg>
       <div class="badge-text">
-        <span class="badge-top">App Storeから</span>
-        <span class="badge-bot">ダウンロード</span>
+        <span class="badge-top">ダウンロード無料</span>
+        <span class="badge-bot">無料で始める</span>
       </div>
     </a>
   </div>
